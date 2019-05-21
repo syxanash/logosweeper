@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-// import _ from 'lodash';
+import _ from 'lodash';
 
 import Logo from './Logo';
+import Choices from './Choices';
 
 class MainControls extends Component {
   constructor(props) {
@@ -18,33 +19,39 @@ class MainControls extends Component {
 
     axios.get(logo_structure_url)
       .then(res => {
-        const getRandomInt = (max) => {
-          return Math.floor(Math.random() * Math.floor(max));
-        }
-
-        const logos_structure = res.data;
-
-        //const three_choices = _.shuffle(logos_structure).slice(0,5);
-
-        debugger;
-
-        const random_logo = logos_structure[Object.keys(logos_structure)[getRandomInt(Object.keys(logos_structure).length)]];
+        const logos_structure = _.shuffle(res.data).slice(0,4);
+        const all_choices = logos_structure.map(item => item.name);
+        const random_logo = _.shuffle(logos_structure)[0];
         const logo_img_url = `https://raw.githubusercontent.com/gilbarbara/logos/master/logos/${random_logo.files[0]}`
 
+        console.log('real one: ' + random_logo.name)
+
         this.setState({
+            all_choices,
             logo_img_url,
             blurred: true
         });
       });
   }
 
+  renderControls() {
+    const {blurred, logo_img_url, all_choices} = this.state;
+    return (
+      <span>
+        <Logo blurred={blurred} url={logo_img_url} />
+        <Choices values={all_choices} />
+      </span>
+    );
+  }
+
   render() {
-    const {blurred, logo_img_url} = this.state;
+    const {logo_img_url} = this.state;
+
     const logo_downloaded = !!logo_img_url;
 
     return (
       logo_downloaded
-        ? <Logo blurred={blurred} url={logo_img_url} />
+        ? this.renderControls()
         : <h1>Loading...</h1>
     )
   }
