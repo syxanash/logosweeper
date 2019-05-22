@@ -4,6 +4,9 @@ import _ from 'lodash';
 
 import Logo from './Logo';
 import Choices from './Choices';
+import AdditionalInfo from './AdditionalInfo';
+
+const LOGOS_REPO = 'https://raw.githubusercontent.com/gilbarbara/logos/master/logos.json';
 
 class MainControls extends Component {
   constructor(props) {
@@ -14,32 +17,48 @@ class MainControls extends Component {
     };
   }
 
-  componentDidMount() {
-    const logo_structure_url = 'https://raw.githubusercontent.com/gilbarbara/logos/master/logos.json';
-
-    axios.get(logo_structure_url)
+  makeRequest(url) {
+    axios.get(url)
       .then(res => {
         const logos_structure = _.shuffle(res.data).slice(0,4);
         const all_choices = logos_structure.map(item => item.name);
         const random_logo = _.shuffle(logos_structure)[0];
         const logo_img_url = `https://raw.githubusercontent.com/gilbarbara/logos/master/logos/${random_logo.files[0]}`
 
-        console.log('real one: ' + random_logo.name)
-
         this.setState({
             all_choices,
+            random_logo,
             logo_img_url,
-            blurred: true
+            guessed: false
         });
       });
   }
 
+  componentDidMount() {
+    this.makeRequest(LOGOS_REPO);
+  }
+
+  onClick(item) {
+    const { random_logo } = this.state;
+
+    if (random_logo.name === item) {
+      this.setState({ guessed: true });
+    } else {
+      alert('Wrong choice!');
+      this.makeRequest(LOGOS_REPO);
+    }
+  }
+
   renderControls() {
-    const {blurred, logo_img_url, all_choices} = this.state;
+    const {guessed, logo_img_url, all_choices, random_logo} = this.state;
     return (
       <span>
-        <Logo blurred={blurred} url={logo_img_url} />
-        <Choices values={all_choices} />
+        <Logo blurred={!guessed} url={logo_img_url} />
+        {
+          guessed
+            ? <AdditionalInfo logo={random_logo} />
+            : <Choices values={all_choices} onClick={this.onClick.bind(this)}/>
+        }
       </span>
     );
   }

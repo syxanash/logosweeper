@@ -1,10 +1,6 @@
 import React, {Component} from 'react';
 
 class Choices extends Component {
-  handleClick(item) {
-    console.log('you clicked ' + item);
-  }
-  
   render() {
     const radio_buttons = this.props.values.map((item, index) => {
       return (
@@ -12,7 +8,7 @@ class Choices extends Component {
           key={`${item}_${index}`}
           type="button"
           value={item}
-          onClick={() => this.handleClick(item)}/>
+          onClick={() => this.props.onClick(item)}/>
       );
     });
 
