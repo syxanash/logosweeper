@@ -7,7 +7,7 @@ class Logo extends Component {
     return (
       <div>
         <h1>Congrats!</h1>
-        <h2>Checkout {logo.name} at: {logo.url}</h2>
+        <h2>Checkout <a href={logo.url}>{logo.name}</a></h2>
       </div>
     );
   }
