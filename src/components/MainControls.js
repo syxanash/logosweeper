@@ -13,7 +13,7 @@ class MainControls extends Component {
     super(props);
 
     this.state = {
-      data: null,
+      score: 0,
     };
   }
 
@@ -39,26 +39,45 @@ class MainControls extends Component {
   }
 
   onClick(item) {
-    const { random_logo } = this.state;
+    const { random_logo, score } = this.state;
 
     if (random_logo.name === item) {
-      this.setState({ guessed: true });
+      this.setState({
+        guessed: true,
+        score: score + 1
+      });
     } else {
-      alert('Wrong choice!');
+      this.setState({
+        guessed: false,
+        score: 0
+      });
+      alert('GAMEOVER!');
       this.makeRequest(LOGOS_REPO);
     }
   }
 
+  onContinue() {
+    this.setState({
+      guessed: false,
+    });
+    this.makeRequest(LOGOS_REPO);
+  }
+
   renderControls() {
-    const {guessed, logo_img_url, all_choices, random_logo} = this.state;
+    const {guessed, logo_img_url, all_choices, random_logo, score} = this.state;
+
     return (
       <span>
         <Logo blurred={!guessed} url={logo_img_url} />
         {
           guessed
-            ? <AdditionalInfo logo={random_logo} />
+            ? <span>
+                <AdditionalInfo logo={random_logo} />
+                <button onClick={this.onContinue.bind(this)}>CONTINUE</button>
+              </span>
             : <Choices values={all_choices} onClick={this.onClick.bind(this)}/>
         }
+        <h2>SCORE {score}</h2>
       </span>
     );
   }
