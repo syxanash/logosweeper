@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ReactSVG from 'react-svg';
+import './Logo.css';
 
 class Logo extends Component {
   render() {
@@ -15,6 +16,7 @@ class Logo extends Component {
 
     return (
       <ReactSVG
+        className={"logo"} 
         src={url}
         beforeInjection={svgStyle}
       />
