@@ -5,3 +5,7 @@
   align-items: center;
   justify-content: center;
 }
+
+.title {
+  padding-bottom: 40px;
+}

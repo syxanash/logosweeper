@@ -1,6 +1,5 @@
 .logo {
-  padding-top: 20px;
-  padding-bottom: 50px;
+  z-index: -1;
 }
 
 .rotate_level_1 {

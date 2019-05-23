@@ -18,7 +18,11 @@ class Logo extends Component {
 
     let cssClasses = 'logo ';
 
-    if (score >= 10) {
+    if (score >= 30) {
+      cssClasses += 'rotate_level_3';
+    } else if (score >= 20) {
+      cssClasses += 'rotate_level_2';
+    } else if (score >= 10) {
       cssClasses += 'rotate_level_1';
     }
 

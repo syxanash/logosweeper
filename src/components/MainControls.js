@@ -6,6 +6,8 @@ import Logo from './Logo';
 import Choices from './Choices';
 import AdditionalInfo from './AdditionalInfo';
 
+import './MainControls.css';
+
 const LOGOS_REPO = 'https://raw.githubusercontent.com/gilbarbara/logos/master/logos.json';
 
 class MainControls extends Component {
@@ -69,15 +71,17 @@ class MainControls extends Component {
     return (
       <span>
         <Logo blurred={!guessed} url={logo_img_url} score={score} />
-        {
-          guessed
-            ? <span>
-                <button onClick={this.onContinue.bind(this)}>CONTINUE</button>
-                <AdditionalInfo logo={random_logo} />
-              </span>
-            : <Choices values={all_choices} onClick={this.onClick.bind(this)}/>
-        }
-        <h2>SCORE {score}</h2>
+        <div className="choices">
+          {
+            guessed
+              ? <span>
+                  <button onClick={this.onContinue.bind(this)}>CONTINUE</button>
+                  <AdditionalInfo logo={random_logo} />
+                </span>
+              : <Choices values={all_choices} onClick={this.onClick.bind(this)}/>
+          }
+          <h2>SCORE {score}</h2>
+        </div>
       </span>
     );
   }
