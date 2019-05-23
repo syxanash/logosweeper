@@ -11,4 +11,4 @@ Made with ❤️ and [MIT](LICENSE.txt)
 
 ## Logo Repository
 
-All logos are taken from [SVGPorn](https://github.com/gilbarbara/logos) repository made @gilbarbara
+All logos are taken from [SVGPorn](https://github.com/gilbarbara/logos) repository made **Gil Barbara**.
