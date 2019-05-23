@@ -1,4 +1,25 @@
 .logo {
   padding-top: 20px;
-  padding-bottom: 40px;
+  padding-bottom: 50px;
+}
+
+.rotate_level_1 {
+  animation: rotation 2s infinite linear;
+}
+
+.rotate_level_2 {
+  animation: rotation 1s infinite linear;
+}
+
+.rotate_level_3 {
+  animation: rotation 0.5s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
 }

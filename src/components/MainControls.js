@@ -68,12 +68,12 @@ class MainControls extends Component {
 
     return (
       <span>
-        <Logo blurred={!guessed} url={logo_img_url} />
+        <Logo blurred={!guessed} url={logo_img_url} score={score} />
         {
           guessed
             ? <span>
-                <AdditionalInfo logo={random_logo} />
                 <button onClick={this.onContinue.bind(this)}>CONTINUE</button>
+                <AdditionalInfo logo={random_logo} />
               </span>
             : <Choices values={all_choices} onClick={this.onClick.bind(this)}/>
         }

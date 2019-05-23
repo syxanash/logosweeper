@@ -4,9 +4,11 @@ import './Logo.css';
 
 class Logo extends Component {
   render() {
-    const {blurred, url} = this.props
+    const {blurred, url, score} = this.props
     
     const svgStyle = svg => {
+      // const logo_width = parseInt(svg.attributes.width.nodeValue.replace(/px/g,''));
+
       if (blurred) {
         svg.setAttribute('style', 'filter: blur(15px)');
       } else {
@@ -14,9 +16,15 @@ class Logo extends Component {
       }
     }
 
+    let cssClasses = 'logo ';
+
+    if (score >= 10) {
+      cssClasses += 'rotate_level_1';
+    }
+
     return (
       <ReactSVG
-        className={"logo"} 
+        className={cssClasses} 
         src={url}
         beforeInjection={svgStyle}
       />
