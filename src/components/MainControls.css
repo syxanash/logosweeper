@@ -1,3 +1,8 @@
-.choices {
+.actionButtons {
   padding-top: 60px;
+}
+
+.rowC {
+  display: flex;
+  flex-direction: row;
 }
