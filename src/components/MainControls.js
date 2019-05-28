@@ -6,6 +6,9 @@ import Logo from './Logo';
 import Choices from './Choices';
 import AdditionalInfo from './AdditionalInfo';
 
+import gameoverLogo from '../resources/images/gameover.svg';
+import thinkingLogo from '../resources/images/thinking.svg';
+
 import './MainControls.css';
 
 const LOGOS_REPO = 'https://raw.githubusercontent.com/gilbarbara/logos/master/logos.json';
@@ -16,6 +19,7 @@ class MainControls extends Component {
 
     this.state = {
       score: 0,
+      gameover: false
     };
   }
 
@@ -50,12 +54,18 @@ class MainControls extends Component {
       });
     } else {
       this.setState({
-        guessed: false,
-        score: 0
+        gameover: true
       });
-      alert('GAMEOVER!');
-      this.makeRequest(LOGOS_REPO);
     }
+  }
+
+  onRestart() {
+    this.setState({
+      guessed: false,
+      gameover: false,
+      score: 0
+    });
+    this.makeRequest(LOGOS_REPO);
   }
 
   onContinue() {
@@ -65,11 +75,28 @@ class MainControls extends Component {
     this.makeRequest(LOGOS_REPO);
   }
 
-  renderControls() {
-    const {guessed, logo_img_url, all_choices, random_logo, score} = this.state;
+  renderGameover() {
+    return (
+      <div>
+        <img src={gameoverLogo} style={{height: '300px'}} alt="gameover"/>
+        <br />
+        <button onClick={this.onRestart.bind(this)}>RESTART</button>
+        <h1>GAMEOVER!!!</h1>
+      </div>
+    );
+  }
+
+  renderChoices() {
+    const {
+      guessed,
+      logo_img_url,
+      all_choices,
+      random_logo,
+      score
+    } = this.state;
 
     return (
-      <span>
+      <div>
         <Logo blurred={!guessed} url={logo_img_url} score={score} />
         <div className="choices">
           {
@@ -78,10 +105,30 @@ class MainControls extends Component {
                   <button onClick={this.onContinue.bind(this)}>CONTINUE</button>
                   <AdditionalInfo logo={random_logo} />
                 </span>
-              : <Choices values={all_choices} onClick={this.onClick.bind(this)}/>
+              : <span>
+                  <img src={thinkingLogo} style={{height: '50px'}} alt="thinking"/>
+                  <Choices values={all_choices} onClick={this.onClick.bind(this)}/>
+                </span>
           }
-          <h2>SCORE {score}</h2>
         </div>
+      </div>
+    );
+  }
+
+  renderControls() {
+    const {
+      score,
+      gameover
+    } = this.state;
+
+    return (
+      <span>
+        {
+          gameover
+            ? this.renderGameover()
+            : this.renderChoices()
+        }
+        <h2>SCORE {score}</h2>
       </span>
     );
   }
