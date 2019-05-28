@@ -7,10 +7,8 @@ class Logo extends Component {
     const {blurred, url, score} = this.props
     
     const svgStyle = svg => {
-      // const logo_width = parseInt(svg.attributes.width.nodeValue.replace(/px/g,''));
-
       if (blurred) {
-        svg.setAttribute('style', 'filter: blur(15px)');
+        svg.setAttribute('style', 'filter: blur(10px)');
       } else {
         svg.setAttribute('style', 'filter: blur(0px)');
       }
@@ -30,6 +28,7 @@ class Logo extends Component {
       <ReactSVG
         className={cssClasses} 
         src={url}
+        loading={() => <h1>Loading logo...</h1>}
         beforeInjection={svgStyle}
       />
     );
