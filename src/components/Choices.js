@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button } from "react95";
+import { Button } from 'react95';
 
 class Choices extends Component {
   render() {

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import _ from 'lodash';
-import { Button } from "react95";
+import { Button, Tooltip } from "react95";
 import RetroHitCounter from 'react-retro-hit-counter';
 
 import Logo from './Logo';
@@ -111,6 +111,7 @@ class MainControls extends Component {
 
     let stateLogo = undefined;
     let actionButtonProps = {};
+    let tooltipText = '';
 
     if (gameStatus === STATUS_GAMEOVER) {
       stateLogo = gameoverLogo;
@@ -118,23 +119,29 @@ class MainControls extends Component {
         ...actionButtonProps,
         onClick: this.onRestart.bind(this)
       }
+      tooltipText = 'Restart game';
     } else if (gameStatus === STATUS_GUESSED) {
       stateLogo = guessedLogo;
       actionButtonProps = {
         ...actionButtonProps,
         onClick: this.onContinue.bind(this)
       }
+
+      tooltipText = 'Next logo';
     } else {
       stateLogo = thinkingLogo;
       actionButtonProps = {
         ...actionButtonProps,
         active: true
       }
+      tooltipText = 'Choose an item below!';
     }
 
-    const actionButton = <Button {...actionButtonProps} size='lg' square>
-      <img src={stateLogo} style={{height: '40px'}} alt={gameStatus}/>
-    </Button>
+    const actionButton = <Tooltip text={tooltipText}>
+      <Button {...actionButtonProps} size='lg' square>
+        <img src={stateLogo} style={{height: '40px'}} alt={gameStatus}/>
+      </Button>
+    </Tooltip>;
 
     return (
       <span>
