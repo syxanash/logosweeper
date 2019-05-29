@@ -85,20 +85,15 @@ class MainControls extends Component {
       random_logo,
       gameover
     } = this.state;
-
-    const actionButton = gameover
-      ? <Button onClick={this.onRestart.bind(this)}>RESTART</Button>
-      : <Button onClick={this.onContinue.bind(this)}>CONTINUE</Button>
     
     return (
       <div style={{paddingTop: '20px'}}>
         {
           showLogo
             ? <span>
-                {actionButton}
                 <AdditionalInfo logo={random_logo} gameover={gameover} />
               </span>
-            : <div className='actionButtons'>
+            : <div className='choiceButtons'>
                 <Choices values={all_choices} onClick={this.onClick.bind(this)}/>
               </div>
         }
@@ -115,18 +110,37 @@ class MainControls extends Component {
     } = this.state;
 
     let stateLogo = undefined;
+    let actionButtonProps = {};
 
     if (gameover) {
       stateLogo = gameoverLogo;
+      actionButtonProps = {
+        ...actionButtonProps,
+        onClick: this.onRestart.bind(this)
+      }
     } else if (showLogo) {
       stateLogo = guessedLogo;
+      actionButtonProps = {
+        ...actionButtonProps,
+        onClick: this.onContinue.bind(this)
+      }
     } else {
       stateLogo = thinkingLogo;
+      actionButtonProps = {
+        ...actionButtonProps,
+        active: true
+      }
     }
+
+    const actionButton = <Button {...actionButtonProps} size='lg' square>
+      <img src={stateLogo} style={{height: '40px'}} alt="status"/>
+    </Button>
 
     return (
       <span>
-        <img src={stateLogo} style={{height: '50px'}} alt="status"/>
+        <div className='actionButtons'>
+          {actionButton}
+        </div>
         <Logo blurred={!showLogo} url={logo_img_url} score={score} />
         {this.renderChoices()}
         <h2>SCORE {score}</h2>

@@ -1,4 +1,10 @@
-.actionButtons {
+.choiceButtons {
   display: flex;
   justify-content: space-between;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
 }
