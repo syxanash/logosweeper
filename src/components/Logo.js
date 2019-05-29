@@ -22,10 +22,21 @@ class Logo extends Component {
         src={url}
         loading={() => <h1>Loading logo...</h1>}
         beforeInjection={svg => {
-          // svg.setAttribute('style', 'height: 50px')
+          const svgWidth = parseInt(svg.attributes.width.nodeValue);
+          const svgHeight = parseInt(svg.attributes.height.nodeValue);
+          
+          console.log(`${svgWidth}x${svgHeight}`);
+
+          if (svgWidth > 256) {
+            svg.setAttribute('width', '256px');
+          }
+
+          if (svgHeight > 256) {
+            svg.setAttribute('height', '256px');
+          }
 
           if (blurred) {
-            svg.setAttribute('style', 'filter: blur(15px)')
+            svg.setAttribute('style', 'filter: blur(10px)')
           }
         }}
       />

@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div className="game">
         <h1>
-          <img src={gameLogo} style={{height: '30px'}} alt="gameLogo"/> Guess Tech Logo
+          <img src={gameLogo} style={{height: '30px'}} alt="🎯"/> Guess Tech Logo
         </h1>
         <MainControls />
       </div>
