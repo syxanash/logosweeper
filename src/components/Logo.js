@@ -6,14 +6,6 @@ class Logo extends Component {
   render() {
     const {blurred, url, score} = this.props
     
-    const svgStyle = svg => {
-      if (blurred) {
-        svg.setAttribute('style', 'filter: blur(15px)');
-      } else {
-        svg.setAttribute('style', 'filter: blur(0px)');
-      }
-    }
-
     let cssClasses = 'logo ';
 
     if (score >= 30) {
@@ -29,7 +21,13 @@ class Logo extends Component {
         className={cssClasses} 
         src={url}
         loading={() => <h1>Loading logo...</h1>}
-        beforeInjection={svgStyle}
+        beforeInjection={svg => {
+          // svg.setAttribute('style', 'height: 50px')
+
+          if (blurred) {
+            svg.setAttribute('style', 'filter: blur(15px)')
+          }
+        }}
       />
     );
   }

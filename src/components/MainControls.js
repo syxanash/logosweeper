@@ -123,10 +123,8 @@ class MainControls extends Component {
 
     return (
       <span>
-        <div className='rowC'>
-          <Logo blurred={!showLogo} url={logo_img_url} score={score} />
-          <img src={stateLogo} style={{marginLeft: '30px', height: '50px'}} alt="status"/>
-        </div>
+        <img src={stateLogo} style={{paddingBottom: '50px', height: '50px'}} alt="status"/>
+        <Logo blurred={!showLogo} url={logo_img_url} score={score} />
         {this.renderChoices()}
         <h2>SCORE {score}</h2>
       </span>
