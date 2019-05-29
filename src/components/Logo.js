@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import ReactSVG from 'react-svg';
+import {Cutout} from 'react95'
+
 import './Logo.css';
 
 class Logo extends Component {
@@ -17,27 +19,30 @@ class Logo extends Component {
     }
 
     return (
-      <ReactSVG
-        className={cssClasses} 
-        src={url}
-        loading={() => <h1>Loading logo...</h1>}
-        beforeInjection={svg => {
-          const svgWidth = parseInt(svg.attributes.width.nodeValue);
-          const svgHeight = parseInt(svg.attributes.height.nodeValue);
+      <Cutout style={{ backgroundColor: 'white' }}>
+        <ReactSVG
+          className={cssClasses} 
+          src={url}
+          loading={() => <h1>Loading logo...</h1>}
+          fallback={() => <h1 style={{color: 'red'}}>Error retrieving logo...</h1>}
+          beforeInjection={svg => {
+            const svgWidth = parseInt(svg.attributes.width.nodeValue);
+            const svgHeight = parseInt(svg.attributes.height.nodeValue);
 
-          if (svgWidth > 256) {
-            svg.setAttribute('width', '256px');
-          }
+            if (svgWidth > 256) {
+              svg.setAttribute('width', '256px');
+            }
 
-          if (svgHeight > 256) {
-            svg.setAttribute('height', '256px');
-          }
+            if (svgHeight > 256) {
+              svg.setAttribute('height', '256px');
+            }
 
-          if (blurred) {
-            svg.setAttribute('style', 'filter: blur(10px)')
-          }
-        }}
-      />
+            if (blurred) {
+              svg.setAttribute('style', 'filter: blur(10px)')
+            }
+          }}
+        />
+      </Cutout>
     );
   }
 }

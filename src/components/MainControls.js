@@ -91,7 +91,7 @@ class MainControls extends Component {
       : <Button onClick={this.onContinue.bind(this)}>CONTINUE</Button>
     
     return (
-      <span>
+      <div style={{paddingTop: '20px'}}>
         {
           showLogo
             ? <span>
@@ -102,7 +102,7 @@ class MainControls extends Component {
                 <Choices values={all_choices} onClick={this.onClick.bind(this)}/>
               </div>
         }
-      </span>
+      </div>
     );
   }
 
@@ -126,7 +126,7 @@ class MainControls extends Component {
 
     return (
       <span>
-        <img src={stateLogo} style={{paddingBottom: '20px', height: '50px'}} alt="status"/>
+        <img src={stateLogo} style={{height: '50px'}} alt="status"/>
         <Logo blurred={!showLogo} url={logo_img_url} score={score} />
         {this.renderChoices()}
         <h2>SCORE {score}</h2>
