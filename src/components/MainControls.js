@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import _ from 'lodash';
+import { Button } from "react95";
 
 import Logo from './Logo';
 import Choices from './Choices';
@@ -86,20 +87,22 @@ class MainControls extends Component {
     } = this.state;
 
     const actionButton = gameover
-      ? <button onClick={this.onRestart.bind(this)}>RESTART</button>
-      : <button onClick={this.onContinue.bind(this)}>CONTINUE</button>
+      ? <Button onClick={this.onRestart.bind(this)}>RESTART</Button>
+      : <Button onClick={this.onContinue.bind(this)}>CONTINUE</Button>
     
     return (
-      <div className='actionButtons'>
+      <span>
         {
           showLogo
             ? <span>
                 {actionButton}
                 <AdditionalInfo logo={random_logo} gameover={gameover} />
               </span>
-            : <Choices values={all_choices} onClick={this.onClick.bind(this)}/>
+            : <div className='actionButtons'>
+                <Choices values={all_choices} onClick={this.onClick.bind(this)}/>
+              </div>
         }
-      </div>
+      </span>
     );
   }
 

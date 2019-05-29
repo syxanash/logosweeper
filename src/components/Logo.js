@@ -24,8 +24,6 @@ class Logo extends Component {
         beforeInjection={svg => {
           const svgWidth = parseInt(svg.attributes.width.nodeValue);
           const svgHeight = parseInt(svg.attributes.height.nodeValue);
-          
-          console.log(`${svgWidth}x${svgHeight}`);
 
           if (svgWidth > 256) {
             svg.setAttribute('width', '256px');
