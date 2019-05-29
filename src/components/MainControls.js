@@ -36,7 +36,7 @@ class MainControls extends Component {
             all_choices,
             random_logo,
             logo_img_url,
-            guessed: false
+            showLogo: false
         });
       });
   }
@@ -50,19 +50,20 @@ class MainControls extends Component {
 
     if (random_logo.name === item) {
       this.setState({
-        guessed: true,
+        showLogo: true,
         score: score + 1
       });
     } else {
       this.setState({
-        gameover: true
+        gameover: true,
+        showLogo: true
       });
     }
   }
 
   onRestart() {
     this.setState({
-      guessed: false,
+      showLogo: false,
       gameover: false,
       score: 0
     });
@@ -71,34 +72,30 @@ class MainControls extends Component {
 
   onContinue() {
     this.setState({
-      guessed: false,
+      showLogo: false,
     });
     this.makeRequest(LOGOS_REPO);
   }
 
-  renderGameover() {
-    return (
-      <div className='actionButtons'>
-        <button onClick={this.onRestart.bind(this)}>RESTART</button>
-        <h1>GAMEOVER!!!</h1>
-      </div>
-    );
-  }
-
   renderChoices() {
     const {
-      guessed,
+      showLogo,
       all_choices,
       random_logo,
+      gameover
     } = this.state;
 
+    const actionButton = gameover
+      ? <button onClick={this.onRestart.bind(this)}>RESTART</button>
+      : <button onClick={this.onContinue.bind(this)}>CONTINUE</button>
+    
     return (
       <div className='actionButtons'>
         {
-          guessed
+          showLogo
             ? <span>
-                <button onClick={this.onContinue.bind(this)}>CONTINUE</button>
-                <AdditionalInfo logo={random_logo} />
+                {actionButton}
+                <AdditionalInfo logo={random_logo} gameover={gameover} />
               </span>
             : <Choices values={all_choices} onClick={this.onClick.bind(this)}/>
         }
@@ -110,31 +107,27 @@ class MainControls extends Component {
     const {
       score,
       gameover,
-      guessed,
+      showLogo,
       logo_img_url
     } = this.state;
 
-    let stateLogo = thinkingLogo;
+    let stateLogo = undefined;
 
     if (gameover) {
       stateLogo = gameoverLogo;
-    }
-
-    if (guessed) {
+    } else if (showLogo) {
       stateLogo = guessedLogo;
+    } else {
+      stateLogo = thinkingLogo;
     }
 
     return (
       <span>
         <div className='rowC'>
-          <Logo blurred={!guessed} url={logo_img_url} score={score} />
+          <Logo blurred={!showLogo} url={logo_img_url} score={score} />
           <img src={stateLogo} style={{marginLeft: '30px', height: '50px'}} alt="status"/>
         </div>
-        {
-          gameover
-            ? this.renderGameover()
-            : this.renderChoices()
-        }
+        {this.renderChoices()}
         <h2>SCORE {score}</h2>
       </span>
     );

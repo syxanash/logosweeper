@@ -8,7 +8,7 @@ class Logo extends Component {
     
     const svgStyle = svg => {
       if (blurred) {
-        svg.setAttribute('style', 'filter: blur(10px)');
+        svg.setAttribute('style', 'filter: blur(15px)');
       } else {
         svg.setAttribute('style', 'filter: blur(0px)');
       }
