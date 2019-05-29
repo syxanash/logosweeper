@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import _ from 'lodash';
 import { Button } from "react95";
+import RetroHitCounter from 'react-retro-hit-counter';
 
 import Logo from './Logo';
 import Choices from './Choices';
@@ -137,12 +138,18 @@ class MainControls extends Component {
 
     return (
       <span>
-        <div className='actionButtons'>
+        <span className='headerContainer'>
+          <div style={{width: '100px'}}></div>
           {actionButton}
-        </div>
+          <RetroHitCounter
+            hits={score}
+            borderThickness={1}
+            segmentActiveColor="#fb3700"
+            segmentInactiveColor="#521900"
+          />
+        </span>
         <Logo blurred={gameStatus === STATUS_THINKING} url={logo_img_url} score={score} />
         {this.renderChoices()}
-        <h2>SCORE {score}</h2>
       </span>
     );
   }
