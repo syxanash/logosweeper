@@ -13,6 +13,8 @@ import thinkingLogo from '../resources/images/thinking.svg';
 import guessedLogo from '../resources/images/guessed.svg';
 import sleepingLogo from '../resources/images/sleeping.svg';
 
+import octocatLogo from '../resources/images/octocat.png';
+
 import './MainControls.css';
 
 const LOGOS_REPO = 'https://raw.githubusercontent.com/gilbarbara/logos/master/logos.json';
@@ -51,7 +53,7 @@ class MainControls extends Component {
     
     this.sleepingTimeout = setTimeout(function() {
       this.setState({ gameStatus: STATUS_SLEEPING });
-    }.bind(this), (Math.random() * (13 - 8) + 8) * 1000);
+    }.bind(this), (Math.random() * (12 - 6) + 6) * 1000);
   }
 
   componentDidMount() {
@@ -112,12 +114,8 @@ class MainControls extends Component {
     );
   }
 
-  renderControls() {
-    const {
-      score,
-      gameStatus,
-      logo_img_url
-    } = this.state;
+  renderActionButton() {
+    const { gameStatus } = this.state;
 
     let stateLogo = undefined;
     let actionButtonProps = {};
@@ -153,18 +151,34 @@ class MainControls extends Component {
       tooltipText = 'Choose an item below!';
     }
 
-    const actionButton = <Tooltip text={tooltipText}>
-      <Button {...actionButtonProps} size='lg' square>
-        <img src={stateLogo} style={{height: '40px'}} alt={gameStatus}/>
-      </Button>
-    </Tooltip>;
+    return (<Tooltip text={tooltipText}>
+        <Button {...actionButtonProps} size='lg' square>
+          <img src={stateLogo} style={{height: '40px'}} alt={gameStatus}/>
+        </Button>
+      </Tooltip>
+    );
+  }
+
+  renderControls() {
+    const {
+      score,
+      gameStatus,
+      logo_img_url
+    } = this.state;
 
     return (
       <span>
         <span className='headerContainer'>
-          {/* empty div to make space even and put action button on the center */}
-          <div style={{width: '100px'}}></div>
-          {actionButton}
+          <div style={{width: '100px'}}>
+            <Tooltip text='fork me on github'>
+              <Button size='lg' square>
+                <a href='https://github.com/syxanash/guesstech' rel="noopener noreferrer" target='_blank'>
+                  <img src={octocatLogo} style={{height: '30px'}} alt="octocat"/>
+                </a>
+              </Button>
+            </Tooltip>
+          </div>
+          {this.renderActionButton()}
           <RetroHitCounter
             hits={score}
             borderThickness={1}
