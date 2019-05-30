@@ -11,6 +11,7 @@ import AdditionalInfo from './AdditionalInfo';
 import gameoverLogo from '../resources/images/gameover.svg';
 import thinkingLogo from '../resources/images/thinking.svg';
 import guessedLogo from '../resources/images/guessed.svg';
+import sleepingLogo from '../resources/images/sleeping.svg';
 
 import './MainControls.css';
 
@@ -19,10 +20,13 @@ const LOGOS_REPO = 'https://raw.githubusercontent.com/gilbarbara/logos/master/lo
 const STATUS_GAMEOVER = '😵';
 const STATUS_THINKING = '🤔';
 const STATUS_GUESSED = '🥳';
+const STATUS_SLEEPING = '😴';
 
 class MainControls extends Component {
   constructor(props) {
     super(props);
+
+    this.sleepingTimeout = undefined;
 
     this.state = {
       score: 0,
@@ -44,6 +48,10 @@ class MainControls extends Component {
             logo_img_url,
         });
       });
+    
+    this.sleepingTimeout = setTimeout(function() {
+      this.setState({ gameStatus: STATUS_SLEEPING });
+    }.bind(this), (Math.random() * (13 - 8) + 8) * 1000);
   }
 
   componentDidMount() {
@@ -51,6 +59,8 @@ class MainControls extends Component {
   }
 
   onClick(item) {
+    clearTimeout(this.sleepingTimeout);
+
     const { random_logo, score } = this.state;
 
     if (random_logo.name === item) {
@@ -126,8 +136,14 @@ class MainControls extends Component {
         ...actionButtonProps,
         onClick: this.onContinue.bind(this)
       }
-
       tooltipText = 'Next logo';
+    } else if (gameStatus === STATUS_SLEEPING) {
+      stateLogo = sleepingLogo;
+      actionButtonProps = {
+        ...actionButtonProps,
+        active: true
+      }
+      tooltipText = 'zzZZ';
     } else {
       stateLogo = thinkingLogo;
       actionButtonProps = {
@@ -146,6 +162,7 @@ class MainControls extends Component {
     return (
       <span>
         <span className='headerContainer'>
+          {/* empty div to make space even and put action button on the center */}
           <div style={{width: '100px'}}></div>
           {actionButton}
           <RetroHitCounter
@@ -155,7 +172,11 @@ class MainControls extends Component {
             segmentInactiveColor="#521900"
           />
         </span>
-        <Logo blurred={gameStatus === STATUS_THINKING} url={logo_img_url} score={score} />
+        <Logo
+          blurred={gameStatus === STATUS_THINKING || gameStatus === STATUS_SLEEPING}
+          url={logo_img_url}
+          score={score}
+        />
         {this.renderChoices()}
       </span>
     );
