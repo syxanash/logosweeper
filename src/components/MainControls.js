@@ -170,7 +170,7 @@ class MainControls extends Component {
           <div style={{width: '100px'}}>
             <Tooltip text='Fork me on GitHub'>
               <Button size='lg' square>
-                <a href='https://github.com/syxanash/guesstech' rel="noopener noreferrer" target='_blank'>
+                <a href='https://github.com/syxanash/guesslogo' rel="noopener noreferrer" target='_blank'>
                   <img src={octocatLogo} style={{height: '30px'}} alt="octocat"/>
                 </a>
               </Button>
