@@ -10,6 +10,17 @@ import bgList from './resources/backgrounds-list.json';
 
 class App extends Component {
   render() {
+    console.info(`
+ _  _     / ___       _  _        _ ___   ___    __   
+| \\/ \\|\\|    |    |  / \\/ \\|/    |_| |     | |_||_    
+|_/\\_/| |    |    |__\\_/\\_/|\\    | | |     | | ||__   
+    _____    _  _       ___ _  _           _ ___ __ 
+|\\||_  | | |/ \\|_)|/     | |_||_)      |V||_| | |_  
+| ||__ | |^|\\_/| \\|\\     | | ||_) /    | || | | |__
+                                                       
+                                              - syx
+    ` );
+
     return (
       <div className="game">
         <Helmet>
@@ -21,7 +32,9 @@ class App extends Component {
         </Helmet>
         <ThemeProvider theme={themes.default}>
           <Window>
-            <WindowHeader><span role='img' aria-label='logo'>🎯</span> Guess Tech Logo</WindowHeader>
+            <WindowHeader>
+              <span role='img' aria-label='logo'>🎯</span> Guess Tech Logo
+            </WindowHeader>
             <WindowContent className='window_content'>
               <MainControls />
             </WindowContent>

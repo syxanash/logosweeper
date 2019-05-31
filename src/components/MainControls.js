@@ -53,7 +53,7 @@ class MainControls extends Component {
     
     this.sleepingTimeout = setTimeout(function() {
       this.setState({ gameStatus: STATUS_SLEEPING });
-    }.bind(this), (Math.random() * (12 - 6) + 6) * 1000);
+    }.bind(this), (Math.random() * (14 - 8) + 8) * 1000);
   }
 
   componentDidMount() {

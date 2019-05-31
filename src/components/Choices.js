@@ -6,6 +6,7 @@ class Choices extends Component {
     const radio_buttons = this.props.values.map((item, index) => {
       return (
         <Button
+          style={{margin: '5px'}}
           key={`${item}_${index}`}
           value={item}
           onClick={() => this.props.onClick(item)}>
