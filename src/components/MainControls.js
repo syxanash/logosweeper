@@ -100,7 +100,7 @@ class MainControls extends Component {
     } = this.state;
     
     return (
-      <div style={{paddingTop: '20px'}}>
+      <div className='footerContainer'>
         {
           (gameStatus === STATUS_GUESSED || gameStatus === STATUS_GAMEOVER)
             ? <AdditionalInfo logo={random_logo} gameover={gameStatus === STATUS_GAMEOVER} />
