@@ -19,7 +19,7 @@ class Logo extends Component {
     }
 
     return (
-      <Cutout style={{ backgroundColor: 'white' }}>
+      <Cutout className='logo_container'>
         <ReactSVG
           className={cssClasses} 
           src={url}

@@ -103,9 +103,7 @@ class MainControls extends Component {
       <div style={{paddingTop: '20px'}}>
         {
           (gameStatus === STATUS_GUESSED || gameStatus === STATUS_GAMEOVER)
-            ? <span>
-                <AdditionalInfo logo={random_logo} gameover={gameStatus === STATUS_GAMEOVER} />
-              </span>
+            ? <AdditionalInfo logo={random_logo} gameover={gameStatus === STATUS_GAMEOVER} />
             : <div className='choiceButtons'>
                 <Choices values={all_choices} onClick={this.onClick.bind(this)}/>
               </div>
@@ -170,7 +168,7 @@ class MainControls extends Component {
       <span>
         <span className='headerContainer'>
           <div style={{width: '100px'}}>
-            <Tooltip text='fork me on github'>
+            <Tooltip text='Fork me on GitHub'>
               <Button size='lg' square>
                 <a href='https://github.com/syxanash/guesstech' rel="noopener noreferrer" target='_blank'>
                   <img src={octocatLogo} style={{height: '30px'}} alt="octocat"/>

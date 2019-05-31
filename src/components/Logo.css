@@ -1,5 +1,10 @@
 .logo {
-  padding: 30px;
+  padding: 20px;
+}
+
+.logo_container {
+  background-color: white;
+  overflow: hidden;
 }
 
 .rotate_level_1 {
