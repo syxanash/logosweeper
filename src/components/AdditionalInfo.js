@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import { Fieldset } from 'react95';
+import { Fieldset, Anchor } from 'react95';
 
 class AdditionalInfo extends Component {
   render() {
@@ -10,14 +10,14 @@ class AdditionalInfo extends Component {
       return (
         <Fieldset>
           <h1 style={{color: 'red'}}>GAMEOVER!</h1>
-          <h2>The logo was from <a href={logo.url} rel="noopener noreferrer" target='_blank'>{logo.name}</a></h2>
+          <h2>The logo was from <Anchor href={logo.url} target='_blank'>{logo.name}</Anchor></h2>
         </Fieldset>
       );
     } else {
       return (
         <Fieldset>
           <h1 style={{color: 'green'}}>Congrats!</h1>
-          <h2>Checkout <a href={logo.url} rel="noopener noreferrer" target='_blank'>{logo.name}</a></h2>
+          <h2>Checkout <Anchor href={logo.url} target='_blank'>{logo.name}</Anchor></h2>
         </Fieldset>
       );
     }

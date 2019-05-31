@@ -3,13 +3,15 @@ import { Button } from 'react95';
 
 class Choices extends Component {
   render() {
-    const radio_buttons = this.props.values.map((item, index) => {
+    const { values, onClick } = this.props;
+
+    const radio_buttons = values.map((item, index) => {
       return (
         <Button
           style={{margin: '5px'}}
           key={`${item}_${index}`}
           value={item}
-          onClick={() => this.props.onClick(item)}>
+          onClick={() => onClick(item)}>
           {item}
         </Button>
       );

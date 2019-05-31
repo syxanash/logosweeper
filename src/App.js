@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { ThemeProvider } from "styled-components";
 import { Window, themes, WindowHeader, WindowContent } from "react95";
 
-import MainControls from './components/MainControls'
+import MainControls from './components/MainControls';
 import './App.css'
 
 import bgList from './resources/backgrounds-list.json';
