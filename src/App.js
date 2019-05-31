@@ -6,12 +6,18 @@ import { Window, themes, WindowHeader, WindowContent } from "react95";
 import MainControls from './components/MainControls'
 import './App.css'
 
+import bgList from './resources/backgrounds-list.json';
+
 class App extends Component {
   render() {
     return (
       <div className="game">
         <Helmet>
-          <style>{'body { background-color: #00807F; }'}</style>
+          <style>
+          {
+            `body { background-image: url("/backgrounds/${bgList[Math.floor(Math.random()*bgList.length)]}"); }`
+          }
+          </style>
         </Helmet>
         <ThemeProvider theme={themes.default}>
           <Window>
