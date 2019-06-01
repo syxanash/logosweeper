@@ -5,6 +5,7 @@ import { Anchor, Window, themes, WindowHeader, WindowContent, Button } from "rea
 import './InfoWindow.css';
 
 import octocatLogo from '../resources/images/octocat.png';
+import twitterLogo from '../resources/images/twitter.svg';
 
 class InfoWindow extends Component {
   render() {
@@ -27,11 +28,15 @@ class InfoWindow extends Component {
                     <img src={octocatLogo} style={{height: '30px'}} alt="octocat"/>
                   </Anchor>
                 </Button>
+                <Button size='lg' square style={{margin: '5px'}}>
+                  <Anchor href='https://twitter.com' target='_blank'>
+                    <img src={twitterLogo} style={{height: '30px'}} alt="twitter"/>
+                  </Anchor>
+                </Button>
                 <Button
                   style={{margin: '5px'}}
                   size='lg'
-                  onClick={() => onClick()}
-                >OK</Button>
+                  onClick={() => onClick()}>OK</Button>
               </div>
             </WindowContent>
           </Window>
