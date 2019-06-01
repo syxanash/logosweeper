@@ -9,3 +9,9 @@
 .window_content {
   text-align: center;
 }
+
+.window_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

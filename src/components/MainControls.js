@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import _ from 'lodash';
-import { Button, Tooltip, Anchor } from "react95";
+import { Button, Tooltip } from "react95";
 import RetroHitCounter from 'react-retro-hit-counter';
 
 import Logo from './Logo';
@@ -12,8 +12,6 @@ import gameoverLogo from '../resources/images/gameover.svg';
 import thinkingLogo from '../resources/images/thinking.svg';
 import guessedLogo from '../resources/images/guessed.svg';
 import sleepingLogo from '../resources/images/sleeping.svg';
-
-import octocatLogo from '../resources/images/octocat.png';
 
 import './MainControls.css';
 
@@ -150,7 +148,7 @@ class MainControls extends Component {
     }
 
     return (<Tooltip text={tooltipText}>
-        <Button {...actionButtonProps} size='lg' square>
+        <Button {...actionButtonProps} size='lg' style={{width: '45px', height: '45px'}} square>
           <img src={stateLogo} style={{height: '40px'}} alt={gameStatus}/>
         </Button>
       </Tooltip>
@@ -167,15 +165,7 @@ class MainControls extends Component {
     return (
       <span>
         <span className='headerContainer'>
-          <div style={{width: '100px'}}>
-            <Tooltip text='Fork me on GitHub'>
-              <Button size='lg' square>
-                <Anchor href='https://github.com/syxanash/guesslogo' target='_blank'>
-                  <img src={octocatLogo} style={{height: '30px'}} alt="octocat"/>
-                </Anchor>
-              </Button>
-            </Tooltip>
-          </div>
+          <div style={{width: '100px'}}></div>
           {this.renderActionButton()}
           <RetroHitCounter
             hits={score}

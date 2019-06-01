@@ -1,39 +1,48 @@
 import React, {Component} from 'react';
 import { Helmet } from 'react-helmet';
 import { ThemeProvider } from "styled-components";
-import { Window, themes, WindowHeader, WindowContent } from "react95";
+import { Window, themes, WindowHeader, WindowContent, Button } from "react95";
 
 import MainControls from './components/MainControls';
+import InfoWindow from './components/InfoWindow';
 import './App.css'
 
 import bgList from './resources/backgrounds-list.json';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showInfo: false,
+      bgWallpaper: bgList[Math.floor(Math.random()*bgList.length)]
+    };
+  }
+
   render() {
-    console.info(`
- _  _     / ___       _  _        _ ___   ___    __   
-| \\/ \\|\\|    |    |  / \\/ \\|/    |_| |     | |_||_    
-|_/\\_/| |    |    |__\\_/\\_/|\\    | | |     | | ||__   
-    _____    _  _       ___ _  _           _ ___ __ 
-|\\||_  | | |/ \\|_)|/     | |_||_)      |V||_| | |_  
-| ||__ | |^|\\_/| \\|\\     | | ||_) /    | || | | |__
-                                                       
-                                              - syx
-    ` );
+    const { showInfo, bgWallpaper } = this.state;
 
     return (
       <div className="game">
         <Helmet>
           <style>
           {
-            `body { background-image: url("/backgrounds/${bgList[Math.floor(Math.random()*bgList.length)]}"); }`
+            `body { background-image: url("/backgrounds/${bgWallpaper}"); }`
           }
           </style>
         </Helmet>
+        <InfoWindow isOpen={showInfo} onClick={() => this.setState({showInfo: false})}/>
         <ThemeProvider theme={themes.default}>
-          <Window>
+          <Window style={{width: '360px'}}>
             <WindowHeader>
-              <span role='img' aria-label='logo'>🎯</span> Guess Tech Logo
+              <div className='window_header'>
+                <span><span role='img' aria-label='logo'>🎯</span> Guess Tech Logo</span>
+                <Button
+                  size='sm'
+                  onClick={() => this.setState({showInfo: true})}
+                  active={showInfo}
+                >?</Button>
+              </div>
             </WindowHeader>
             <WindowContent className='window_content'>
               <MainControls />
