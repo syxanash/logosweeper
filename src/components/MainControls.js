@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import _ from 'lodash';
-import { Button, Tooltip } from "react95";
+import { Button, Tooltip, Anchor } from "react95";
 import RetroHitCounter from 'react-retro-hit-counter';
 
 import Logo from './Logo';
@@ -170,9 +170,9 @@ class MainControls extends Component {
           <div style={{width: '100px'}}>
             <Tooltip text='Fork me on GitHub'>
               <Button size='lg' square>
-                <a href='https://github.com/syxanash/guesslogo' rel="noopener noreferrer" target='_blank'>
+                <Anchor href='https://github.com/syxanash/guesslogo' target='_blank'>
                   <img src={octocatLogo} style={{height: '30px'}} alt="octocat"/>
-                </a>
+                </Anchor>
               </Button>
             </Tooltip>
           </div>
