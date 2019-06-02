@@ -3,6 +3,7 @@ import axios from 'axios';
 import _ from 'lodash';
 import { Button, Tooltip } from "react95";
 import RetroHitCounter from 'react-retro-hit-counter';
+import 'animate.css';
 
 import Logo from './Logo';
 import Choices from './Choices';
@@ -121,14 +122,16 @@ class MainControls extends Component {
       stateLogo = gameoverLogo;
       actionButtonProps = {
         ...actionButtonProps,
-        onClick: this.onRestart.bind(this)
+        onClick: this.onRestart.bind(this),
+        className: 'animated heartBeat delay-3s'
       }
       tooltipText = 'Restart game';
     } else if (gameStatus === STATUS_GUESSED) {
       stateLogo = guessedLogo;
       actionButtonProps = {
         ...actionButtonProps,
-        onClick: this.onContinue.bind(this)
+        onClick: this.onContinue.bind(this),
+        className: 'animated tada delay-3s'
       }
       tooltipText = 'Next logo';
     } else if (gameStatus === STATUS_SLEEPING) {
