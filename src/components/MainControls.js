@@ -129,7 +129,7 @@ class MainControls extends Component {
       actionButtonProps = {
         ...actionButtonProps,
         onClick: this.onRestart.bind(this),
-        className: 'animated heartBeat delay-3s'
+        className: 'animated heartBeat delay-2s'
       }
       tooltipText = 'Restart game';
     } else if (gameStatus === STATUS_GUESSED) {
@@ -137,7 +137,7 @@ class MainControls extends Component {
       actionButtonProps = {
         ...actionButtonProps,
         onClick: this.onContinue.bind(this),
-        className: 'animated tada delay-3s'
+        className: 'animated tada delay-2s'
       }
       tooltipText = 'Next logo';
     } else if (gameStatus === STATUS_SLEEPING) {

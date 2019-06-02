@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import './index.css';
 import App from './App';
-//import registerServiceWorker from './registerServiceWorker';
+import registerServiceWorker from './registerServiceWorker';
 
 console.info(`
                  _             _            _ _     _             _                       
@@ -21,4 +21,4 @@ console.info(`
 - syx` );
 
 ReactDOM.render(<App />,  document.getElementById('root'));
-//registerServiceWorker();
+registerServiceWorker();
