@@ -9,12 +9,12 @@ import Logo from './Logo';
 import Choices from './Choices';
 import AdditionalInfo from './AdditionalInfo';
 
+import './MainControls.css';
+
 import gameoverLogo from '../resources/images/gameover.svg';
 import thinkingLogo from '../resources/images/thinking.svg';
 import guessedLogo from '../resources/images/guessed.svg';
 import sleepingLogo from '../resources/images/sleeping.svg';
-
-import './MainControls.css';
 
 const LOGOS_REPO = 'https://raw.githubusercontent.com/gilbarbara/logos/master/logos.json';
 
@@ -35,28 +35,34 @@ class MainControls extends Component {
     };
   }
 
-  makeRequest(url) {
-    axios.get(url)
-      .then(res => {
-        const logos_structure = _.shuffle(res.data).slice(0,4);
-        const all_choices = logos_structure.map(item => item.name);
-        const random_logo = _.shuffle(logos_structure)[0];
-        const logo_img_url = `https://raw.githubusercontent.com/gilbarbara/logos/master/logos/${random_logo.files[0]}`
+  shuffleLogoList() {
+    const {all_logos} = this.state;
 
-        this.setState({
-            all_choices,
-            random_logo,
-            logo_img_url,
-        });
-      });
-    
+    const logos_structure = _.shuffle(all_logos).slice(0,4);
+    const all_choices = logos_structure.map(item => item.name);
+    const random_logo = _.shuffle(logos_structure)[0];
+    const logo_img_url = `https://raw.githubusercontent.com/gilbarbara/logos/master/logos/${random_logo.files[0]}`
+
+    this.setState({
+      all_choices,
+      random_logo,
+      logo_img_url,
+    });
+
     this.sleepingTimeout = setTimeout(function() {
       this.setState({ gameStatus: STATUS_SLEEPING });
     }.bind(this), (Math.random() * (14 - 8) + 8) * 1000);
   }
 
   componentDidMount() {
-    this.makeRequest(LOGOS_REPO);
+    axios.get(LOGOS_REPO)
+      .then(res => {
+        this.setState({
+          all_logos: res.data
+        });
+
+        this.shuffleLogoList();
+      });
   }
 
   onClick(item) {
@@ -81,14 +87,14 @@ class MainControls extends Component {
       score: 0,
       gameStatus: STATUS_THINKING
     });
-    this.makeRequest(LOGOS_REPO);
+    this.shuffleLogoList();
   }
 
   onContinue() {
     this.setState({
       gameStatus: STATUS_THINKING
     });
-    this.makeRequest(LOGOS_REPO);
+    this.shuffleLogoList();
   }
 
   renderChoices() {
@@ -114,7 +120,7 @@ class MainControls extends Component {
   renderActionButton() {
     const { gameStatus } = this.state;
 
-    let stateLogo = undefined;
+    let stateLogo;
     let actionButtonProps = {};
     let tooltipText = '';
 
