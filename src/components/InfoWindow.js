@@ -29,14 +29,14 @@ class InfoWindow extends Component {
                   </Anchor>
                 </Button>
                 <Button size='lg' square style={{margin: '5px'}}>
-                  <Anchor href='https://twitter.com' target='_blank'>
+                  <Anchor href='https://twitter.com/intent/tweet?text=guess your logo' target='_blank'>
                     <img src={twitterLogo} style={{height: '30px'}} alt="twitter"/>
                   </Anchor>
                 </Button>
                 <Button
-                  style={{margin: '5px'}}
+                  style={{margin: '5px', width: '80px'}}
                   size='lg'
-                  onClick={() => onClick()}>OK</Button>
+                  onClick={() => onClick()}>Ok</Button>
               </div>
             </WindowContent>
           </Window>
