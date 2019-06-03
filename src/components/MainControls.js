@@ -34,7 +34,7 @@ class MainControls extends Component {
     this.state = {
       score: 0,
       gameStatus: STATUS_THINKING,
-      soundMuted: false,
+      soundMuted: true,
     };
   }
 
@@ -112,14 +112,15 @@ class MainControls extends Component {
     const {
       gameStatus,
       all_choices,
-      random_logo
+      random_logo,
+      score
     } = this.state;
     
     return (
       <div className='footerContainer'>
         {
           (gameStatus === STATUS_GUESSED || gameStatus === STATUS_GAMEOVER)
-            ? <AdditionalInfo logo={random_logo} gameover={gameStatus === STATUS_GAMEOVER} />
+            ? <AdditionalInfo score={score} logo={random_logo} gameover={gameStatus === STATUS_GAMEOVER} />
             : <div className='choiceButtons'>
                 <Choices values={all_choices} onClick={this.onClick.bind(this)}/>
               </div>
