@@ -44,6 +44,9 @@ class MainControls extends Component {
     const logos_structure = _.shuffle(all_logos).slice(0,4);
     const all_choices = logos_structure.map(item => item.name);
     const random_logo = _.shuffle(logos_structure)[0];
+
+    _.remove(all_logos, (item) => item.name === random_logo.name);
+
     const logo_img_url = `https://raw.githubusercontent.com/gilbarbara/logos/master/logos/${random_logo.files[0]}`
 
     this.setState({
@@ -57,7 +60,7 @@ class MainControls extends Component {
     }.bind(this), (Math.random() * (14 - 8) + 8) * 1000);
   }
 
-  componentDidMount() {
+  fetchAndShuffle() {
     axios.get(LOGOS_REPO)
       .then(res => {
         this.setState({
@@ -66,6 +69,10 @@ class MainControls extends Component {
 
         this.shuffleLogoList();
       });
+  }
+
+  componentDidMount() {
+    this.fetchAndShuffle();
   }
 
   onClick(item) {
@@ -96,7 +103,8 @@ class MainControls extends Component {
       score: 0,
       gameStatus: STATUS_THINKING
     });
-    this.shuffleLogoList();
+    
+    this.fetchAndShuffle();
   }
 
   onContinue() {
@@ -181,8 +189,12 @@ class MainControls extends Component {
       score,
       gameStatus,
       logo_img_url,
-      soundMuted
+      soundMuted,
+      all_logos
     } = this.state;
+
+    if (all_logos.length === 0)
+      return <h1 style={{color: 'green'}}>ABSOLUTE MADLAD YOU WON THE GAME!</h1>;
 
     return (
       <span>
