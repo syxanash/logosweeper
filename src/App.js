@@ -36,7 +36,7 @@ class App extends Component {
           <Window style={{width: '360px'}}>
             <WindowHeader>
               <div className='window_header'>
-                <span><span role='img' aria-label='logo'>🎯</span> Guess Tech Logo</span>
+                <span><span role='img' aria-label='logo'>🎯</span> Quiz Logo</span>
                 <Button
                   size='sm'
                   onClick={() => this.setState({showInfo: true})}

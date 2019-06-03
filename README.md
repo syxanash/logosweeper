@@ -1,4 +1,4 @@
-# 🎯 Guess Tech Logo
+# 🎯 Quiz Logo
 
 ## About
 

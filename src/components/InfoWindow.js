@@ -24,7 +24,7 @@ class InfoWindow extends Component {
               <p style={{textAlign: 'left'}}>hello world</p>
               <div className='action_buttons_container'>
                 <Button size='lg' square style={{margin: '5px'}}>
-                  <Anchor href='https://github.com/syxanash/guesslogo' target='_blank'>
+                  <Anchor href='https://github.com/syxanash/quizlogo' target='_blank'>
                     <img src={octocatLogo} style={{height: '30px'}} alt="octocat"/>
                   </Anchor>
                 </Button>
