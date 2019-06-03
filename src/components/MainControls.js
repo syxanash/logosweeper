@@ -8,6 +8,7 @@ import 'animate.css';
 import Logo from './Logo';
 import Choices from './Choices';
 import AdditionalInfo from './AdditionalInfo';
+import SoundEffects from './SoundEffects';
 
 import './MainControls.css';
 
@@ -15,6 +16,7 @@ import gameoverLogo from '../resources/images/gameover.svg';
 import thinkingLogo from '../resources/images/thinking.svg';
 import guessedLogo from '../resources/images/guessed.svg';
 import sleepingLogo from '../resources/images/sleeping.svg';
+import mutedIcon from '../resources/images/muted.svg';
 
 const LOGOS_REPO = 'https://raw.githubusercontent.com/gilbarbara/logos/master/logos.json';
 
@@ -31,7 +33,8 @@ class MainControls extends Component {
 
     this.state = {
       score: 0,
-      gameStatus: STATUS_THINKING
+      gameStatus: STATUS_THINKING,
+      soundMuted: false,
     };
   }
 
@@ -71,11 +74,15 @@ class MainControls extends Component {
     const { random_logo, score } = this.state;
 
     if (random_logo.name === item) {
+      document.getElementById('guessedSound').play();
+
       this.setState({
         score: score + 1,
         gameStatus: STATUS_GUESSED
       });
     } else {
+      document.getElementById('gameoverSound').play();
+
       this.setState({
         gameStatus: STATUS_GAMEOVER,
       });
@@ -83,6 +90,8 @@ class MainControls extends Component {
   }
 
   onRestart() {
+    document.getElementById('buttonClickSound').play();
+
     this.setState({
       score: 0,
       gameStatus: STATUS_THINKING
@@ -91,6 +100,8 @@ class MainControls extends Component {
   }
 
   onContinue() {
+    document.getElementById('buttonClickSound').play();
+
     this.setState({
       gameStatus: STATUS_THINKING
     });
@@ -129,7 +140,7 @@ class MainControls extends Component {
       actionButtonProps = {
         ...actionButtonProps,
         onClick: this.onRestart.bind(this),
-        className: 'animated heartBeat delay-2s'
+        className: 'animated heartBeat delay-3s'
       }
       tooltipText = 'Restart game';
     } else if (gameStatus === STATUS_GUESSED) {
@@ -137,7 +148,7 @@ class MainControls extends Component {
       actionButtonProps = {
         ...actionButtonProps,
         onClick: this.onContinue.bind(this),
-        className: 'animated tada delay-2s'
+        className: 'animated heartBeat delay-3s'
       }
       tooltipText = 'Next logo';
     } else if (gameStatus === STATUS_SLEEPING) {
@@ -168,13 +179,29 @@ class MainControls extends Component {
     const {
       score,
       gameStatus,
-      logo_img_url
+      logo_img_url,
+      soundMuted
     } = this.state;
 
     return (
       <span>
+        <SoundEffects muted={soundMuted} />
         <span className='headerContainer'>
-          <div style={{width: '100px'}}></div>
+          <div style={{width: '100px'}}>
+            <Tooltip text='Mute sound effects'>
+              <Button
+                size='lg'
+                style={{width: '45px', height: '45px'}}
+                square
+                onClick={() => {
+                  this.setState({soundMuted: !soundMuted});
+                }}
+                active={soundMuted}
+                >
+                <img src={mutedIcon} style={{height: '40px'}} alt='mute'/>
+              </Button>
+            </Tooltip>
+          </div>
           {this.renderActionButton()}
           <RetroHitCounter
             hits={score}
@@ -201,7 +228,7 @@ class MainControls extends Component {
     return (
       logo_downloaded
         ? this.renderControls()
-        : <h1>Loading...</h1>
+        : <h1>Loading game...</h1>
     )
   }
 }
