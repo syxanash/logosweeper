@@ -1,4 +1,4 @@
-# 🎯 Quiz Logo
+# 🎯 Logosweeper
 
 A tech logo guess game made with React.
 

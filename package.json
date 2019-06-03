@@ -1,5 +1,5 @@
 {
-  "name": "quizlogo",
+  "name": "logosweeper",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -20,7 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "react-scripts build && surge --domain quizlogo.surge.sh build/"
+    "deploy": "react-scripts build && surge --domain logosweeper.surge.sh build/"
   },
   "eslintConfig": {
     "extends": "react-app"

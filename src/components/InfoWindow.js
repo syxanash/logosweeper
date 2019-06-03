@@ -24,12 +24,12 @@ class InfoWindow extends Component {
               <p style={{textAlign: 'left'}}>Test how wise and knowledgeable you are about new technologies by guessing as many logos as you can in a row.<br /><br />Made with ❤️ and 🍺 by <b>syx</b></p>
               <div className='action_buttons_container'>
                 <Button size='lg' square style={{margin: '5px'}}>
-                  <Anchor href='https://github.com/syxanash/quizlogo' target='_blank'>
+                  <Anchor href='https://github.com/syxanash/logosweeper' target='_blank'>
                     <img src={octocatLogo} style={{height: '30px'}} alt="octocat"/>
                   </Anchor>
                 </Button>
                 <Button size='lg' square style={{margin: '5px'}}>
-                  <Anchor href='https://twitter.com/intent/tweet?text=Test%20how%20wise%20and%20knowledgeable%20you%20are%20about%20new%20technologies%20by%20guessing%20as%20many%20logos%20as%20you%20can%20in%20a%20row%20%F0%9F%8E%AF%20https%3A%2F%2Fquizlogo.surge.sh' target='_blank'>
+                  <Anchor href='https://twitter.com/intent/tweet?text=Test%20how%20wise%20and%20knowledgeable%20you%20are%20about%20new%20technologies%20by%20guessing%20as%20many%20logos%20as%20you%20can%20in%20a%20row%20%F0%9F%8E%AF%20https%3A%2F%2Flogosweeper.surge.sh' target='_blank'>
                     <img src={twitterLogo} style={{height: '30px'}} alt="twitter"/>
                   </Anchor>
                 </Button>
