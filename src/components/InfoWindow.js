@@ -21,7 +21,7 @@ class InfoWindow extends Component {
               <span role='img' aria-label='logo'>🎯</span> About
             </WindowHeader>
             <WindowContent className='window_content'>
-              <p style={{textAlign: 'left'}}>Test how wise and knowledgeable you are about new technologies by guessing as many logos as you can in a row.</p>
+              <p style={{textAlign: 'left'}}>Test how wise and knowledgeable you are about new technologies by guessing as many logos as you can in a row.<br /><br />Made with ❤️ and 🍺 by <b>syx</b></p>
               <div className='action_buttons_container'>
                 <Button size='lg' square style={{margin: '5px'}}>
                   <Anchor href='https://github.com/syxanash/quizlogo' target='_blank'>
