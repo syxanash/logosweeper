@@ -5,7 +5,7 @@ class Choices extends Component {
   render() {
     const { values, onClick } = this.props;
 
-    const radio_buttons = values.map((item, index) => {
+    const radioButtons = values.map((item, index) => {
       return (
         <Button
           style={{margin: '5px'}}
@@ -17,7 +17,7 @@ class Choices extends Component {
       );
     });
 
-    return radio_buttons;
+    return radioButtons;
   }
 }
 

@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import _ from 'lodash';
 import { Button, Tooltip } from "react95";
-import RetroHitCounter from 'react-retro-hit-counter';
 import 'animate.css';
 
 import Logo from './Logo';
 import Choices from './Choices';
 import AdditionalInfo from './AdditionalInfo';
 import SoundEffects from './SoundEffects';
+import ScoreCounter from './ScoreCounter';
 
 import './MainControls.css';
 
@@ -33,26 +33,27 @@ class MainControls extends Component {
 
     this.state = {
       score: 0,
+      oldScore: 0,
       gameStatus: STATUS_THINKING,
       soundMuted: true,
     };
   }
 
   shuffleLogoList() {
-    const {all_logos} = this.state;
+    const {logosList} = this.state;
 
-    const logos_structure = _.shuffle(all_logos).slice(0,4);
-    const all_choices = logos_structure.map(item => item.name);
-    const random_logo = _.shuffle(logos_structure)[0];
+    const logosStructure = _.shuffle(logosList).slice(0,4);
+    const allChoices = logosStructure.map(item => item.name);
+    const randomLogo = _.shuffle(logosStructure)[0];
 
-    _.remove(all_logos, (item) => item.name === random_logo.name);
+    _.remove(logosList, (item) => item.name === randomLogo.name);
 
-    const logo_img_url = `https://raw.githubusercontent.com/gilbarbara/logos/master/logos/${random_logo.files[0]}`
+    const logoImgUrl = `https://raw.githubusercontent.com/gilbarbara/logos/master/logos/${randomLogo.files[0]}`
 
     this.setState({
-      all_choices,
-      random_logo,
-      logo_img_url,
+      allChoices,
+      randomLogo,
+      logoImgUrl,
     });
 
     this.sleepingTimeout = setTimeout(function() {
@@ -64,7 +65,7 @@ class MainControls extends Component {
     axios.get(LOGOS_REPO)
       .then(res => {
         this.setState({
-          all_logos: res.data
+          logosList: res.data
         });
 
         this.shuffleLogoList();
@@ -78,9 +79,9 @@ class MainControls extends Component {
   onClick(item) {
     clearTimeout(this.sleepingTimeout);
 
-    const { random_logo, score } = this.state;
+    const { randomLogo, score } = this.state;
 
-    if (random_logo.name === item) {
+    if (randomLogo.name === item) {
       document.getElementById('guessedSound').play();
 
       this.setState({
@@ -97,9 +98,11 @@ class MainControls extends Component {
   }
 
   onRestart() {
-    document.getElementById('buttonClickSound').play();
+    const {score} = this.state;
 
+    document.getElementById('buttonClickSound').play();
     this.setState({
+      oldScore: score,
       score: 0,
       gameStatus: STATUS_THINKING
     });
@@ -119,8 +122,8 @@ class MainControls extends Component {
   renderChoices() {
     const {
       gameStatus,
-      all_choices,
-      random_logo,
+      allChoices,
+      randomLogo,
       score
     } = this.state;
     
@@ -128,9 +131,9 @@ class MainControls extends Component {
       <div className='footerContainer'>
         {
           (gameStatus === STATUS_GUESSED || gameStatus === STATUS_GAMEOVER)
-            ? <AdditionalInfo score={score} logo={random_logo} gameover={gameStatus === STATUS_GAMEOVER} />
+            ? <AdditionalInfo score={score} logo={randomLogo} gameover={gameStatus === STATUS_GAMEOVER} />
             : <div className='choiceButtons'>
-                <Choices values={all_choices} onClick={this.onClick.bind(this)}/>
+                <Choices values={allChoices} onClick={this.onClick.bind(this)}/>
               </div>
         }
       </div>
@@ -188,12 +191,13 @@ class MainControls extends Component {
     const {
       score,
       gameStatus,
-      logo_img_url,
+      logoImgUrl,
       soundMuted,
-      all_logos
+      logosList,
+      oldScore
     } = this.state;
 
-    if (all_logos.length === 0)
+    if (logosList.length === 0)
       return <h1 style={{color: 'green'}}>ABSOLUTE MADLAD YOU WON THE GAME!</h1>;
 
     return (
@@ -210,22 +214,17 @@ class MainControls extends Component {
                   this.setState({soundMuted: !soundMuted});
                 }}
                 active={soundMuted}
-                >
+              >
                 <img src={mutedIcon} style={{height: '40px'}} alt='mute'/>
               </Button>
             </Tooltip>
           </div>
           {this.renderActionButton()}
-          <RetroHitCounter
-            hits={score}
-            borderThickness={1}
-            segmentActiveColor="#fb3700"
-            segmentInactiveColor="#521900"
-          />
+          <ScoreCounter score={score} oldScore={oldScore} />
         </span>
         <Logo
           blurred={gameStatus === STATUS_THINKING || gameStatus === STATUS_SLEEPING}
-          url={logo_img_url}
+          url={logoImgUrl}
           score={score}
         />
         {this.renderChoices()}
@@ -234,9 +233,9 @@ class MainControls extends Component {
   }
 
   render() {
-    const {logo_img_url} = this.state;
+    const {logoImgUrl} = this.state;
 
-    const logo_downloaded = !!logo_img_url;
+    const logo_downloaded = !!logoImgUrl;
 
     return (
       logo_downloaded
