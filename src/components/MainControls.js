@@ -226,6 +226,16 @@ class MainControls extends Component {
           blurred={gameStatus === STATUS_THINKING || gameStatus === STATUS_SLEEPING}
           url={logoImgUrl}
           score={score}
+          fallbackError={() => {
+            return (
+              <span>
+                <h1 style={{color: 'red'}}>Error rendering logo...</h1>
+                <Button onClick={this.onContinue.bind(this)} size='md'>
+                  Retry
+                </Button>
+              </span>
+            );
+          }}
         />
         {this.renderChoices()}
       </span>

@@ -6,7 +6,7 @@ import './Logo.css';
 
 class Logo extends Component {
   render() {
-    const {blurred, url, score} = this.props
+    const {blurred, url, score, fallbackError} = this.props
     
     let cssClasses = 'logo ';
 
@@ -24,7 +24,7 @@ class Logo extends Component {
           className={cssClasses} 
           src={url}
           loading={() => <Hourglass size={125} />}
-          fallback={() => <h1 style={{color: 'red'}}>Error retrieving logo...</h1>}
+          fallback={() => fallbackError()}
           beforeInjection={svg => {
             const svgWidth = parseInt(svg.attributes.width.nodeValue);
             const svgHeight = parseInt(svg.attributes.height.nodeValue);
