@@ -42,9 +42,9 @@ class MainControls extends Component {
   shuffleLogoList() {
     const {logosList} = this.state;
 
-    const logosStructure = _.shuffle(logosList).slice(0,4);
-    const allChoices = logosStructure.map(item => item.name);
-    const randomLogo = _.shuffle(logosStructure)[0];
+    const randomChoices = _.shuffle(logosList).slice(0,4);
+    const allChoices = randomChoices.map(item => item.name);
+    const randomLogo = _.shuffle(randomChoices)[0];
 
     _.remove(logosList, (item) => item.name === randomLogo.name);
 
