@@ -28,6 +28,7 @@ $ yarn start
 ## About
 
 This app was made just as a small project to learn [React](https://reactjs.org/). If you have suggestions, tips or rants please open an *issue* so I can fix and learn something ;)
+All logos appearing on this app are property of their respective owners.
 
 ## License
 

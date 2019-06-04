@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { ThemeProvider } from "styled-components";
 import { Anchor, Window, themes, WindowHeader, WindowContent, Button } from "react95";
+import 'animate.css';
 
 import './InfoWindow.css';
 
@@ -21,7 +22,7 @@ class InfoWindow extends Component {
               <span role='img' aria-label='logo'>🎯</span> About
             </WindowHeader>
             <WindowContent className='window_content'>
-              <p style={{textAlign: 'left'}}>Test how wise and knowledgeable you are about new technologies by guessing as many logos as you can in a row.<br /><br />Made with ❤️ and 🍺 by <b>syx</b></p>
+              <p style={{textAlign: 'left'}}>Test how wise and knowledgeable you are about new technologies by guessing as many logos as you can in a row.<br /><br /><i>All logos appearing on this app are property of their respective owners.</i><br /><br />Made with <div className='animated heartBeat infinite' style={{display: 'inline-block'}}><span role='img' aria-label='love'>❤️</span></div> and <span role="img" aria-label="beer">🍺</span> by <b>syx</b></p>
               <div className='action_buttons_container'>
                 <Button size='lg' square style={{margin: '5px'}}>
                   <Anchor href='https://github.com/syxanash/logosweeper' target='_blank'>
