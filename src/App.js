@@ -41,7 +41,8 @@ class App extends Component {
                   size='sm'
                   onClick={() => this.setState({showInfo: true})}
                   active={showInfo}
-                >?</Button>
+                  style={{ marginRight: '-6px', marginTop: '1px' }}
+                ><span style={{ fontWeight: 'bold', transform: 'translateY(-1px)' }}>?</span></Button>
               </div>
             </WindowHeader>
             <WindowContent className='window_content'>
