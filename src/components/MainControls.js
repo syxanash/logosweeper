@@ -205,7 +205,7 @@ class MainControls extends Component {
         <SoundEffects muted={soundMuted} />
         <span className='headerContainer'>
           <div style={{width: '100px'}}>
-            <Tooltip text='Mute sound effects'>
+            <Tooltip text={(soundMuted ? 'Play' : 'Mute') + ' sound effects'}>
               <Button
                 size='lg'
                 style={{width: '45px', height: '45px'}}
