@@ -1,19 +1,16 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactSVG from 'react-svg';
 import { Cutout, Hourglass } from 'react95';
 
 import './Logo.css';
 
 class Logo extends Component {
-
-  renderHourGlass = () => {
-    return <Hourglass size={ 125 } />;
-  }
+  renderHourGlass = () => <Hourglass size={ 125 } />;
 
   applyBlurFilter = (svg) => {
-    const {blurred} = this.props;
-    const svgWidth = parseInt(svg.attributes.width.nodeValue);
-    const svgHeight = parseInt(svg.attributes.height.nodeValue);
+    const { blurred } = this.props;
+    const svgWidth = parseInt(svg.attributes.width.nodeValue, 10);
+    const svgHeight = parseInt(svg.attributes.height.nodeValue, 10);
 
     if (blurred) {
       svg.setAttribute('style', 'filter: blur(8px)');
@@ -35,8 +32,8 @@ class Logo extends Component {
   }
 
   render() {
-    const {url, score, fallbackError} = this.props;
-    
+    const { url, score, fallbackError } = this.props;
+
     let cssClasses = 'logo ';
 
     if (score >= 30) {
@@ -50,7 +47,7 @@ class Logo extends Component {
     return (
       <Cutout className='logo_container'>
         <ReactSVG
-          className={ cssClasses } 
+          className={ cssClasses }
           src={ url }
           loading={ this.renderHourGlass }
           fallback={ fallbackError }

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import _ from 'lodash';
 import { Button, Tooltip } from 'react95';
@@ -40,13 +40,13 @@ class MainControls extends Component {
   }
 
   shuffleLogoList() {
-    const {logosList} = this.state;
+    const { logosList } = this.state;
 
-    const randomChoices = _.shuffle(logosList).slice(0,4);
+    const randomChoices = _.shuffle(logosList).slice(0, 4);
     const allChoices = randomChoices.map(item => item.name);
     const randomLogo = _.shuffle(randomChoices)[0];
 
-    _.remove(logosList, (item) => item.name === randomLogo.name);
+    _.remove(logosList, item => item.name === randomLogo.name);
 
     const logoImgUrl = `https://raw.githubusercontent.com/gilbarbara/logos/master/logos/${randomLogo.files[0]}`;
 
@@ -56,16 +56,16 @@ class MainControls extends Component {
       logoImgUrl,
     });
 
-    this.sleepingTimeout = setTimeout(function() {
+    this.sleepingTimeout = setTimeout(() => {
       this.setState({ gameStatus: STATUS_SLEEPING });
-    }.bind(this), (Math.random() * (14 - 8) + 8) * 1000);
+    }, (Math.random() * (14 - 8) + 8) * 1000);
   }
 
   fetchAndShuffle() {
     axios.get(LOGOS_REPO)
-      .then(res => {
+      .then((res) => {
         this.setState({
-          logosList: res.data
+          logosList: res.data,
         });
 
         this.shuffleLogoList();
@@ -86,7 +86,7 @@ class MainControls extends Component {
 
       this.setState({
         score: score + 1,
-        gameStatus: STATUS_GUESSED
+        gameStatus: STATUS_GUESSED,
       });
     } else {
       document.getElementById('gameoverSound').play();
@@ -98,15 +98,15 @@ class MainControls extends Component {
   }
 
   onRestart() {
-    const {score} = this.state;
+    const { score } = this.state;
 
     document.getElementById('buttonClickSound').play();
     this.setState({
       oldScore: score,
       score: 0,
-      gameStatus: STATUS_THINKING
+      gameStatus: STATUS_THINKING,
     });
-    
+
     this.fetchAndShuffle();
   }
 
@@ -114,7 +114,7 @@ class MainControls extends Component {
     document.getElementById('buttonClickSound').play();
 
     this.setState({
-      gameStatus: STATUS_THINKING
+      gameStatus: STATUS_THINKING,
     });
     this.shuffleLogoList();
   }
@@ -124,14 +124,17 @@ class MainControls extends Component {
       gameStatus,
       allChoices,
       randomLogo,
-      score
+      score,
     } = this.state;
-    
+
     return (
       <div className='footerContainer'>
         {
           (gameStatus === STATUS_GUESSED || gameStatus === STATUS_GAMEOVER)
-            ? <AdditionalInfo score={ score } logo={ randomLogo } gameover={ gameStatus === STATUS_GAMEOVER } />
+            ? <AdditionalInfo
+              score={ score }
+              logo={ randomLogo }
+              gameover={ gameStatus === STATUS_GAMEOVER } />
             : <div className='choiceButtons'>
               <Choices values={ allChoices } onClick={ this.onClick }/>
             </div>
@@ -152,7 +155,7 @@ class MainControls extends Component {
       actionButtonProps = {
         ...actionButtonProps,
         onClick: this.onRestart.bind(this),
-        className: 'animated heartBeat delay-3s'
+        className: 'animated heartBeat delay-3s',
       };
       tooltipText = 'Restart game';
     } else if (gameStatus === STATUS_GUESSED) {
@@ -160,28 +163,28 @@ class MainControls extends Component {
       actionButtonProps = {
         ...actionButtonProps,
         onClick: this.onContinue.bind(this),
-        className: 'animated heartBeat delay-3s'
+        className: 'animated heartBeat delay-3s',
       };
       tooltipText = 'Next logo';
     } else if (gameStatus === STATUS_SLEEPING) {
       stateLogo = sleepingLogo;
       actionButtonProps = {
         ...actionButtonProps,
-        active: true
+        active: true,
       };
       tooltipText = 'zzZZ';
     } else {
       stateLogo = thinkingLogo;
       actionButtonProps = {
         ...actionButtonProps,
-        active: true
+        active: true,
       };
       tooltipText = 'Choose an item below!';
     }
 
     return (<Tooltip text={ tooltipText }>
-      <Button { ...actionButtonProps } size='lg' style={ {width: '45px', height: '45px'} } square>
-        <img src={ stateLogo } style={ {height: '40px'} } alt={ gameStatus }/>
+      <Button { ...actionButtonProps } size='lg' style={ { width: '45px', height: '45px' } } square>
+        <img src={ stateLogo } style={ { height: '40px' } } alt={ gameStatus }/>
       </Button>
     </Tooltip>
     );
@@ -194,28 +197,27 @@ class MainControls extends Component {
       logoImgUrl,
       soundMuted,
       logosList,
-      oldScore
+      oldScore,
     } = this.state;
 
-    if (logosList.length === 0)
-      return <h1 style={ {color: 'green'} }>ABSOLUTE MADLAD YOU WON THE GAME!</h1>;
+    if (logosList.length === 0) return <h1 style={ { color: 'green' } }>ABSOLUTE MADLAD YOU WON THE GAME!</h1>;
 
     return (
       <span>
         <SoundEffects muted={ soundMuted } />
         <span className='headerContainer'>
-          <div style={ {width: '100px'} }>
-            <Tooltip text={ (soundMuted ? 'Play' : 'Mute') + ' sound effects' }>
+          <div style={ { width: '100px' } }>
+            <Tooltip text={ `${soundMuted ? 'Play' : 'Mute'} sound effects` }>
               <Button
                 size='lg'
-                style={ {width: '45px', height: '45px'} }
+                style={ { width: '45px', height: '45px' } }
                 square
                 onClick={ () => {
-                  this.setState({soundMuted: !soundMuted});
+                  this.setState({ soundMuted: !soundMuted });
                 } }
                 active={ soundMuted }
               >
-                <img src={ mutedIcon } style={ {height: '40px'} } alt='mute'/>
+                <img src={ mutedIcon } style={ { height: '40px' } } alt='mute'/>
               </Button>
             </Tooltip>
           </div>
@@ -226,16 +228,14 @@ class MainControls extends Component {
           blurred={ gameStatus === STATUS_THINKING || gameStatus === STATUS_SLEEPING }
           url={ logoImgUrl }
           score={ score }
-          fallbackError={ () => {
-            return (
-              <span>
-                <h1 style={ {color: 'red'} }>Error rendering logo...</h1>
-                <Button onClick={ this.onContinue } size='md'>
-                  Retry
-                </Button>
-              </span>
-            );
-          } }
+          fallbackError={ () => (
+            <span>
+              <h1 style={ { color: 'red' } }>Error rendering logo...</h1>
+              <Button onClick={ this.onContinue } size='md'>
+                Retry
+              </Button>
+            </span>
+          ) }
         />
         {this.renderChoices()}
       </span>
@@ -243,12 +243,12 @@ class MainControls extends Component {
   }
 
   render() {
-    const {logoImgUrl} = this.state;
+    const { logoImgUrl } = this.state;
 
-    const logo_downloaded = !!logoImgUrl;
+    const logoDownloaded = !!logoImgUrl;
 
     return (
-      logo_downloaded
+      logoDownloaded
         ? this.renderControls()
         : <h1>Loading game...</h1>
     );

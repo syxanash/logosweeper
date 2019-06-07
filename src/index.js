@@ -18,6 +18,6 @@ console.info(`
 | (_| | |_  | |_| | | |  __/ | | | |  __/ |_ \\ V  V / (_) | |  |   <  | || (_| | |_) /\\_/ 
  \\__,_|\\__|  \\__|_| |_|\\___| |_| |_|\\___|\\__| \\_/\\_/ \\___/|_|  |_|\\_\\  \\__\\__,_|_.__/\\/   
                                                        
-- syx` );
+- syx`);
 
-ReactDOM.render(<App />,  document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));

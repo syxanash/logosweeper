@@ -9,7 +9,7 @@ module.exports = {
         "require": true,
         "module": true,
     },
-    "extends": "eslint:recommended",
+    "extends": ["eslint:recommended", "airbnb-base"],
     "parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
