@@ -8,7 +8,8 @@ class Choices extends Component {
     const radioButtons = values.map((item, index) => {
       return (
         <Button
-          style={{margin: '5px'}}
+          size="lg"
+          style={{fontSize: '20px', margin: '5px'}}
           key={`${item}_${index}`}
           value={item}
           onClick={() => onClick(item)}>
