@@ -7,10 +7,10 @@ class ScoreCounter extends Component {
     const {score, oldScore} = this.props;
 
     return (
-      <span className={score === 0 && oldScore !== 0 ? 'animated swing' : ''}>
+      <span className={ score === 0 && oldScore !== 0 ? 'animated swing' : '' }>
         <RetroHitCounter
-          hits={score}
-          borderThickness={1}
+          hits={ score }
+          borderThickness={ 1 }
           segmentActiveColor="#fb3700"
           segmentInactiveColor="#521900"
         />

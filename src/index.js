@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 
 import './index.css';
 import App from './App';
-// import registerServiceWorker from './registerServiceWorker';
 
+// eslint-disable-next-line no-console
 console.info(`
                  _             _            _ _     _             _                       
  _ __ ___   __ _| |_ ___    __| | ___  _ __( ) |_  | | ___   ___ | | __                   
@@ -21,4 +21,3 @@ console.info(`
 - syx` );
 
 ReactDOM.render(<App />,  document.getElementById('root'));
-// registerServiceWorker();

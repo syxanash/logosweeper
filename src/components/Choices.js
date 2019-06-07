@@ -9,10 +9,11 @@ class Choices extends Component {
       return (
         <Button
           size="lg"
-          style={{fontSize: '20px', margin: '5px'}}
-          key={`${item}_${index}`}
-          value={item}
-          onClick={() => onClick(item)}>
+          style={ {fontSize: '20px', margin: '5px'} }
+          key={ `${item}_${index}` }
+          value={ item }
+          onClick={ () => onClick(item) }
+        >
           {item}
         </Button>
       );

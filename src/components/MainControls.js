@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import _ from 'lodash';
-import { Button, Tooltip } from "react95";
+import { Button, Tooltip } from 'react95';
 import 'animate.css';
 
 import Logo from './Logo';
@@ -48,7 +48,7 @@ class MainControls extends Component {
 
     _.remove(logosList, (item) => item.name === randomLogo.name);
 
-    const logoImgUrl = `https://raw.githubusercontent.com/gilbarbara/logos/master/logos/${randomLogo.files[0]}`
+    const logoImgUrl = `https://raw.githubusercontent.com/gilbarbara/logos/master/logos/${randomLogo.files[0]}`;
 
     this.setState({
       allChoices,
@@ -76,7 +76,7 @@ class MainControls extends Component {
     this.fetchAndShuffle();
   }
 
-  onClick(item) {
+  onClick = (item) => {
     clearTimeout(this.sleepingTimeout);
 
     const { randomLogo, score } = this.state;
@@ -110,7 +110,7 @@ class MainControls extends Component {
     this.fetchAndShuffle();
   }
 
-  onContinue() {
+  onContinue = () => {
     document.getElementById('buttonClickSound').play();
 
     this.setState({
@@ -131,10 +131,10 @@ class MainControls extends Component {
       <div className='footerContainer'>
         {
           (gameStatus === STATUS_GUESSED || gameStatus === STATUS_GAMEOVER)
-            ? <AdditionalInfo score={score} logo={randomLogo} gameover={gameStatus === STATUS_GAMEOVER} />
+            ? <AdditionalInfo score={ score } logo={ randomLogo } gameover={ gameStatus === STATUS_GAMEOVER } />
             : <div className='choiceButtons'>
-                <Choices values={allChoices} onClick={this.onClick.bind(this)}/>
-              </div>
+              <Choices values={ allChoices } onClick={ this.onClick }/>
+            </div>
         }
       </div>
     );
@@ -153,7 +153,7 @@ class MainControls extends Component {
         ...actionButtonProps,
         onClick: this.onRestart.bind(this),
         className: 'animated heartBeat delay-3s'
-      }
+      };
       tooltipText = 'Restart game';
     } else if (gameStatus === STATUS_GUESSED) {
       stateLogo = guessedLogo;
@@ -161,29 +161,29 @@ class MainControls extends Component {
         ...actionButtonProps,
         onClick: this.onContinue.bind(this),
         className: 'animated heartBeat delay-3s'
-      }
+      };
       tooltipText = 'Next logo';
     } else if (gameStatus === STATUS_SLEEPING) {
       stateLogo = sleepingLogo;
       actionButtonProps = {
         ...actionButtonProps,
         active: true
-      }
+      };
       tooltipText = 'zzZZ';
     } else {
       stateLogo = thinkingLogo;
       actionButtonProps = {
         ...actionButtonProps,
         active: true
-      }
+      };
       tooltipText = 'Choose an item below!';
     }
 
-    return (<Tooltip text={tooltipText}>
-        <Button {...actionButtonProps} size='lg' style={{width: '45px', height: '45px'}} square>
-          <img src={stateLogo} style={{height: '40px'}} alt={gameStatus}/>
-        </Button>
-      </Tooltip>
+    return (<Tooltip text={ tooltipText }>
+      <Button { ...actionButtonProps } size='lg' style={ {width: '45px', height: '45px'} } square>
+        <img src={ stateLogo } style={ {height: '40px'} } alt={ gameStatus }/>
+      </Button>
+    </Tooltip>
     );
   }
 
@@ -198,44 +198,44 @@ class MainControls extends Component {
     } = this.state;
 
     if (logosList.length === 0)
-      return <h1 style={{color: 'green'}}>ABSOLUTE MADLAD YOU WON THE GAME!</h1>;
+      return <h1 style={ {color: 'green'} }>ABSOLUTE MADLAD YOU WON THE GAME!</h1>;
 
     return (
       <span>
-        <SoundEffects muted={soundMuted} />
+        <SoundEffects muted={ soundMuted } />
         <span className='headerContainer'>
-          <div style={{width: '100px'}}>
-            <Tooltip text={(soundMuted ? 'Play' : 'Mute') + ' sound effects'}>
+          <div style={ {width: '100px'} }>
+            <Tooltip text={ (soundMuted ? 'Play' : 'Mute') + ' sound effects' }>
               <Button
                 size='lg'
-                style={{width: '45px', height: '45px'}}
+                style={ {width: '45px', height: '45px'} }
                 square
-                onClick={() => {
+                onClick={ () => {
                   this.setState({soundMuted: !soundMuted});
-                }}
-                active={soundMuted}
+                } }
+                active={ soundMuted }
               >
-                <img src={mutedIcon} style={{height: '40px'}} alt='mute'/>
+                <img src={ mutedIcon } style={ {height: '40px'} } alt='mute'/>
               </Button>
             </Tooltip>
           </div>
           {this.renderActionButton()}
-          <ScoreCounter score={score} oldScore={oldScore} />
+          <ScoreCounter score={ score } oldScore={ oldScore } />
         </span>
         <Logo
-          blurred={gameStatus === STATUS_THINKING || gameStatus === STATUS_SLEEPING}
-          url={logoImgUrl}
-          score={score}
-          fallbackError={() => {
+          blurred={ gameStatus === STATUS_THINKING || gameStatus === STATUS_SLEEPING }
+          url={ logoImgUrl }
+          score={ score }
+          fallbackError={ () => {
             return (
               <span>
-                <h1 style={{color: 'red'}}>Error rendering logo...</h1>
-                <Button onClick={this.onContinue.bind(this)} size='md'>
+                <h1 style={ {color: 'red'} }>Error rendering logo...</h1>
+                <Button onClick={ this.onContinue } size='md'>
                   Retry
                 </Button>
               </span>
             );
-          }}
+          } }
         />
         {this.renderChoices()}
       </span>
@@ -251,7 +251,7 @@ class MainControls extends Component {
       logo_downloaded
         ? this.renderControls()
         : <h1>Loading game...</h1>
-    )
+    );
   }
 }
 
