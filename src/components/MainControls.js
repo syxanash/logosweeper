@@ -212,9 +212,7 @@ class MainControls extends Component {
                 size='lg'
                 style={ { width: '45px', height: '45px' } }
                 square
-                onClick={ () => {
-                  this.setState({ soundMuted: !soundMuted });
-                } }
+                onClick={ () => { this.setState({ soundMuted: !soundMuted }); } }
                 active={ soundMuted }
               >
                 <img src={ mutedIcon } style={ { height: '40px' } } alt='mute'/>
