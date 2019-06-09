@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 
 import './index.css';
 import App from './App';
-// import registerServiceWorker from './registerServiceWorker';
 
 console.info(`
                  _             _            _ _     _             _                       
@@ -18,7 +17,6 @@ console.info(`
 | (_| | |_  | |_| | | |  __/ | | | |  __/ |_ \\ V  V / (_) | |  |   <  | || (_| | |_) /\\_/ 
  \\__,_|\\__|  \\__|_| |_|\\___| |_| |_|\\___|\\__| \\_/\\_/ \\___/|_|  |_|\\_\\  \\__\\__,_|_.__/\\/   
                                                        
-- syx` );
+- syx`);
 
-ReactDOM.render(<App />,  document.getElementById('root'));
-// registerServiceWorker();
+ReactDOM.render(<App />, document.getElementById('root'));

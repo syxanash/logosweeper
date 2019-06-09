@@ -1,11 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import { ThemeProvider } from "styled-components";
-import { Window, themes, WindowHeader, WindowContent, Button } from "react95";
+import { ThemeProvider } from 'styled-components';
+import {
+  Window, themes, WindowHeader, WindowContent, Button,
+} from 'react95';
 
 import MainControls from './components/MainControls';
 import InfoWindow from './components/InfoWindow';
-import './App.css'
+import './App.css';
 
 import bgList from './resources/backgrounds-list.json';
 
@@ -15,7 +17,7 @@ class App extends Component {
 
     this.state = {
       showInfo: false,
-      bgWallpaper: bgList[Math.floor(Math.random()*bgList.length)]
+      bgWallpaper: bgList[Math.floor(Math.random() * bgList.length)],
     };
   }
 
@@ -26,23 +28,23 @@ class App extends Component {
       <div className="game">
         <Helmet>
           <style>
-          {
-            `body { background-image: url("/backgrounds/${bgWallpaper}"); }`
-          }
+            {
+              `body { background-image: url("/backgrounds/${bgWallpaper}"); }`
+            }
           </style>
         </Helmet>
-        <InfoWindow isOpen={showInfo} onClick={() => this.setState({showInfo: false})}/>
-        <ThemeProvider theme={themes.default}>
-          <Window style={{width: '360px'}}>
+        <InfoWindow isOpen={ showInfo } onClick={ () => this.setState({ showInfo: false }) }/>
+        <ThemeProvider theme={ themes.default }>
+          <Window style={ { width: '360px' } }>
             <WindowHeader>
               <div className='window_header'>
                 <span><span role='img' aria-label='logo'>🎯</span> Logosweeper</span>
                 <Button
                   size='sm'
-                  onClick={() => this.setState({showInfo: true})}
-                  active={showInfo}
-                  style={{ marginRight: '-6px', marginTop: '1px' }}
-                ><span style={{ fontWeight: 'bold', transform: 'translateY(-1px)' }}>?</span></Button>
+                  onClick={ () => this.setState({ showInfo: true }) }
+                  active={ showInfo }
+                  style={ { marginRight: '-6px', marginTop: '1px' } }
+                ><span style={ { fontWeight: 'bold', transform: 'translateY(-1px)' } }>?</span></Button>
               </div>
             </WindowHeader>
             <WindowContent className='window_content'>
