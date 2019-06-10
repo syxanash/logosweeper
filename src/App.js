@@ -51,7 +51,7 @@ class App extends Component {
                     active={ soundEnabled }
                     style={ { marginRight: '5px' } }
                   >
-                    <img src={ noteIcon } style={ { height: '25px' } } alt='mute'/>
+                    <img src={ noteIcon } style={ { height: '25px', transform: 'translateY(-1px)' } } alt='mute'/>
                   </Button>
                   <Button
                     size='sm'

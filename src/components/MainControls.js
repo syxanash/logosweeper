@@ -28,11 +28,13 @@ class MainControls extends Component {
     super(props);
 
     this.sleepingTimeout = undefined;
+    this.scoreTimer = undefined;
 
     this.state = {
       score: 0,
       oldScore: 0,
       gameStatus: STATUS_THINKING,
+      timerCount: 0,
     };
   }
 
@@ -58,6 +60,10 @@ class MainControls extends Component {
     }, (Math.random() * (14 - 8) + 8) * 1000);
   }
 
+  tick() {
+    this.setState({ timerCount: (this.state.timerCount + 1) });
+  }
+
   fetchAndShuffle() {
     axios.get(LOGOS_REPO)
       .then((res) => {
@@ -67,6 +73,8 @@ class MainControls extends Component {
 
         this.shuffleLogoList();
       });
+
+    this.scoreTimer = setInterval(() => this.tick(), 1000);
   }
 
   componentDidMount() {
@@ -88,6 +96,8 @@ class MainControls extends Component {
     } else {
       document.getElementById('gameoverSound').play();
 
+      clearInterval(this.scoreTimer);
+
       this.setState({
         gameStatus: STATUS_GAMEOVER,
       });
@@ -101,6 +111,7 @@ class MainControls extends Component {
     this.setState({
       oldScore: score,
       score: 0,
+      timerCount: 0,
       gameStatus: STATUS_THINKING,
     });
 
@@ -122,6 +133,7 @@ class MainControls extends Component {
       allChoices,
       randomLogo,
       score,
+      timerCount,
     } = this.state;
 
     return (
@@ -130,6 +142,7 @@ class MainControls extends Component {
           (gameStatus === STATUS_GUESSED || gameStatus === STATUS_GAMEOVER)
             ? <AdditionalInfo
               score={ score }
+              timeCount={ timerCount }
               logo={ randomLogo }
               gameover={ gameStatus === STATUS_GAMEOVER } />
             : <div className='choiceButtons'>
@@ -194,6 +207,7 @@ class MainControls extends Component {
       logoImgUrl,
       logosList,
       oldScore,
+      timerCount,
     } = this.state;
 
     if (logosList.length === 0) return <h1 style={ { color: 'green' } }>ABSOLUTE MADLAD YOU WON THE GAME!</h1>;
@@ -201,10 +215,9 @@ class MainControls extends Component {
     return (
       <span>
         <span className='headerContainer'>
-          <div style={ { width: '100px' } }>
-          </div>
+          <ScoreCounter score={ score } oldScore={ oldScore } animated={ true } />
           {this.renderActionButton()}
-          <ScoreCounter score={ score } oldScore={ oldScore } />
+          <ScoreCounter score={ timerCount } animated={ false } />
         </span>
         <Logo
           blurred={ gameStatus === STATUS_THINKING || gameStatus === STATUS_SLEEPING }
