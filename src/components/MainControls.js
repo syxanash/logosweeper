@@ -7,7 +7,6 @@ import 'animate.css';
 import Logo from './Logo';
 import Choices from './Choices';
 import AdditionalInfo from './AdditionalInfo';
-import SoundEffects from './SoundEffects';
 import ScoreCounter from './ScoreCounter';
 
 import './MainControls.css';
@@ -16,7 +15,6 @@ import gameoverLogo from '../resources/images/gameover.svg';
 import thinkingLogo from '../resources/images/thinking.svg';
 import guessedLogo from '../resources/images/guessed.svg';
 import sleepingLogo from '../resources/images/sleeping.svg';
-import mutedIcon from '../resources/images/muted.svg';
 
 const LOGOS_REPO = 'https://raw.githubusercontent.com/gilbarbara/logos/master/logos.json';
 
@@ -35,7 +33,6 @@ class MainControls extends Component {
       score: 0,
       oldScore: 0,
       gameStatus: STATUS_THINKING,
-      soundMuted: true,
     };
   }
 
@@ -195,7 +192,6 @@ class MainControls extends Component {
       score,
       gameStatus,
       logoImgUrl,
-      soundMuted,
       logosList,
       oldScore,
     } = this.state;
@@ -204,20 +200,8 @@ class MainControls extends Component {
 
     return (
       <span>
-        <SoundEffects muted={ soundMuted } />
         <span className='headerContainer'>
           <div style={ { width: '100px' } }>
-            <Tooltip text={ `${soundMuted ? 'Play' : 'Mute'} sound effects` }>
-              <Button
-                size='lg'
-                style={ { width: '45px', height: '45px' } }
-                square
-                onClick={ () => { this.setState({ soundMuted: !soundMuted }); } }
-                active={ soundMuted }
-              >
-                <img src={ mutedIcon } style={ { height: '40px' } } alt='mute'/>
-              </Button>
-            </Tooltip>
           </div>
           {this.renderActionButton()}
           <ScoreCounter score={ score } oldScore={ oldScore } />
