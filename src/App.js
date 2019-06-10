@@ -37,7 +37,6 @@ class App extends Component {
             }
           </style>
         </Helmet>
-        <SoundEffects muted={ !soundEnabled } />
         <InfoWindow isOpen={ showInfo } onClick={ () => this.setState({ showInfo: false }) }/>
         <ThemeProvider theme={ themes.default }>
           <Window style={ { width: '360px' } }>
@@ -66,6 +65,7 @@ class App extends Component {
               </div>
             </WindowHeader>
             <WindowContent className='window_content'>
+              <SoundEffects muted={ !soundEnabled } />
               <MainControls />
             </WindowContent>
           </Window>
