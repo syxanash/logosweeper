@@ -7,7 +7,6 @@ import 'animate.css';
 import Logo from './Logo';
 import Choices from './Choices';
 import AdditionalInfo from './AdditionalInfo';
-import SoundEffects from './SoundEffects';
 import ScoreCounter from './ScoreCounter';
 
 import './MainControls.css';
@@ -16,7 +15,6 @@ import gameoverLogo from '../resources/images/gameover.svg';
 import thinkingLogo from '../resources/images/thinking.svg';
 import guessedLogo from '../resources/images/guessed.svg';
 import sleepingLogo from '../resources/images/sleeping.svg';
-import mutedIcon from '../resources/images/muted.svg';
 
 const LOGOS_REPO = 'https://raw.githubusercontent.com/gilbarbara/logos/master/logos.json';
 
@@ -30,12 +28,13 @@ class MainControls extends Component {
     super(props);
 
     this.sleepingTimeout = undefined;
+    this.scoreTimer = undefined;
 
     this.state = {
       score: 0,
       oldScore: 0,
       gameStatus: STATUS_THINKING,
-      soundMuted: true,
+      timerCount: 0,
     };
   }
 
@@ -61,6 +60,10 @@ class MainControls extends Component {
     }, (Math.random() * (14 - 8) + 8) * 1000);
   }
 
+  tick() {
+    this.setState({ timerCount: (this.state.timerCount + 1) });
+  }
+
   fetchAndShuffle() {
     axios.get(LOGOS_REPO)
       .then((res) => {
@@ -70,6 +73,8 @@ class MainControls extends Component {
 
         this.shuffleLogoList();
       });
+
+    this.scoreTimer = setInterval(() => this.tick(), 1000);
   }
 
   componentDidMount() {
@@ -91,6 +96,8 @@ class MainControls extends Component {
     } else {
       document.getElementById('gameoverSound').play();
 
+      clearInterval(this.scoreTimer);
+
       this.setState({
         gameStatus: STATUS_GAMEOVER,
       });
@@ -104,6 +111,7 @@ class MainControls extends Component {
     this.setState({
       oldScore: score,
       score: 0,
+      timerCount: 0,
       gameStatus: STATUS_THINKING,
     });
 
@@ -125,6 +133,7 @@ class MainControls extends Component {
       allChoices,
       randomLogo,
       score,
+      timerCount,
     } = this.state;
 
     return (
@@ -133,6 +142,7 @@ class MainControls extends Component {
           (gameStatus === STATUS_GUESSED || gameStatus === STATUS_GAMEOVER)
             ? <AdditionalInfo
               score={ score }
+              timeCount={ timerCount }
               logo={ randomLogo }
               gameover={ gameStatus === STATUS_GAMEOVER } />
             : <div className='choiceButtons'>
@@ -155,7 +165,7 @@ class MainControls extends Component {
       actionButtonProps = {
         ...actionButtonProps,
         onClick: this.onRestart.bind(this),
-        className: 'animated heartBeat delay-2s infinite',
+        className: 'animated tada delay-2s infinite',
       };
       tooltipText = 'Restart game';
     } else if (gameStatus === STATUS_GUESSED) {
@@ -195,32 +205,19 @@ class MainControls extends Component {
       score,
       gameStatus,
       logoImgUrl,
-      soundMuted,
       logosList,
       oldScore,
+      timerCount,
     } = this.state;
 
     if (logosList.length === 0) return <h1 style={ { color: 'green' } }>ABSOLUTE MADLAD YOU WON THE GAME!</h1>;
 
     return (
       <span>
-        <SoundEffects muted={ soundMuted } />
         <span className='headerContainer'>
-          <div style={ { width: '100px' } }>
-            <Tooltip text={ `${soundMuted ? 'Play' : 'Mute'} sound effects` }>
-              <Button
-                size='lg'
-                style={ { width: '45px', height: '45px' } }
-                square
-                onClick={ () => { this.setState({ soundMuted: !soundMuted }); } }
-                active={ soundMuted }
-              >
-                <img src={ mutedIcon } style={ { height: '40px' } } alt='mute'/>
-              </Button>
-            </Tooltip>
-          </div>
+          <ScoreCounter score={ score } oldScore={ oldScore } animated={ true } />
           {this.renderActionButton()}
-          <ScoreCounter score={ score } oldScore={ oldScore } />
+          <ScoreCounter score={ timerCount } animated={ false } />
         </span>
         <Logo
           blurred={ gameStatus === STATUS_THINKING || gameStatus === STATUS_SLEEPING }

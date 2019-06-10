@@ -4,12 +4,18 @@ import 'animate.css';
 
 class ScoreCounter extends Component {
   render() {
-    const { score, oldScore } = this.props;
+    const { score, oldScore, animated } = this.props;
 
     return (
-      <span className={ score === 0 && oldScore !== 0 ? 'animated swing' : '' }>
+      <span className={
+        animated
+        && score === 0
+        && oldScore !== 0 ? 'animated swing' : ''
+      }
+      >
         <RetroHitCounter
           hits={ score }
+          minLength={ 3 }
           borderThickness={ 1 }
           segmentActiveColor="#fb3700"
           segmentInactiveColor="#521900"
