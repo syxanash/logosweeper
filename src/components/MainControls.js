@@ -165,7 +165,7 @@ class MainControls extends Component {
       actionButtonProps = {
         ...actionButtonProps,
         onClick: this.onRestart.bind(this),
-        className: 'animated heartBeat delay-2s infinite',
+        className: 'animated tada delay-2s infinite',
       };
       tooltipText = 'Restart game';
     } else if (gameStatus === STATUS_GUESSED) {
