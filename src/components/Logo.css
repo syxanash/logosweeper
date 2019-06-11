@@ -5,6 +5,11 @@
 .logo_container {
   background-color: white;
   overflow: hidden;
+  height: 300px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .rotate_level_1 {
