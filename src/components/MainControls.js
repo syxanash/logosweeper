@@ -47,7 +47,7 @@ class MainControls extends Component {
 
     _.remove(logosList, item => item.name === randomLogo.name);
 
-    const logoImgUrl = `https://raw.githubusercontent.com/gilbarbara/logos/master/logos/${randomLogo.files[0]}`;
+    const logoImgUrl = `https://cdn.svgporn.com/logos/${randomLogo.files[0]}`;
 
     this.setState({
       allChoices,
