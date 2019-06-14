@@ -193,7 +193,7 @@ class MainControls extends Component {
     }
 
     return (<Tooltip text={ tooltipText }>
-      <Button { ...actionButtonProps } size='lg' style={ { width: '45px', height: '45px' } } square>
+      <Button { ...actionButtonProps } size='lg' style={ { width: '50px', height: '50px' } } square>
         <img src={ stateLogo } style={ { height: '40px' } } alt={ gameStatus }/>
       </Button>
     </Tooltip>
