@@ -4,8 +4,8 @@ A tech logo guess game made with React.
 
 ## Screenshots
 
-<img src="src/resources/screen1.png" height="450" alt="screen1" />
-<img src="src/resources/screen2.png" height="520" alt="screen2" />
+<img src="src/resources/screen1.png" height='500' alt="screen1" />
+<img src="src/resources/screen2.png" height='500' alt="screen2" />
 
 ## Build locally
 
@@ -24,14 +24,6 @@ $ yarn start
 * [OpenMoji](https://openmoji.org)
 * Windows 95 [wallpapers repository](http://dvd3000.000webhostapp.com/WIN95.html)
 * 3 audio chimes are from the game [Yoda Stories](https://en.wikipedia.org/wiki/Star_Wars:_Yoda_Stories) (let's see if I will receive a _cease and desist_ from Disney lol)
-
-## Known issues
-
-Due to a CORS issue sometimes an error will appear on the screen and you will be requested to click a **Retry** button.
-
-<img src="src/resources/error_screen.png" height="200" alt="error_screen" />
-
-I'm not entirely sure how to fix this error since is something that might have to do with the server used to retrieve the logo files.
 
 ## About
 
