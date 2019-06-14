@@ -10,9 +10,9 @@
     "react-dom": "^16.8.6",
     "react-draggable": "^3.3.0",
     "react-helmet": "^5.2.1",
+    "react-load-image": "^0.1.7",
     "react-retro-hit-counter": "^1.0.1",
     "react-scripts": "^3.0.1",
-    "react-svg": "^10.0.2",
     "react95": "^2.0.0",
     "styled-components": "^4.2.0"
   },

@@ -1,38 +1,17 @@
 import React, { Component } from 'react';
-import ReactSVG from 'react-svg';
 import { Cutout, Hourglass } from 'react95';
+import ImageLoader from 'react-load-image';
 
 import './Logo.css';
 
 class Logo extends Component {
-  renderHourGlass = () => <Hourglass size={ 125 } />;
-
-  applyBlurFilter = (svg) => {
-    const { blurred } = this.props;
-    const svgWidth = parseInt(svg.attributes.width.nodeValue, 10);
-    const svgHeight = parseInt(svg.attributes.height.nodeValue, 10);
-
-    if (blurred) {
-      svg.setAttribute('style', 'filter: blur(8px)');
-    }
-
-    if (svgWidth > 256) {
-      // if width is more than 256px most likely the logo is composed
-      // of a written text so increase the blur filter
-      if (blurred) {
-        svg.setAttribute('style', 'filter: blur(10px)');
-      }
-
-      svg.setAttribute('width', '256px');
-    }
-
-    if (svgHeight > 256) {
-      svg.setAttribute('height', '256px');
-    }
-  }
-
   render() {
-    const { url, score, fallbackError } = this.props;
+    const {
+      url,
+      score,
+      blurred,
+      fallbackError: FallbackScreen,
+    } = this.props;
 
     let cssClasses = 'logo ';
 
@@ -44,15 +23,19 @@ class Logo extends Component {
       cssClasses += 'rotate_level_1';
     }
 
+    const blurredFilter = blurred ? 'blur(8px)' : 'blur(0px)';
+
     return (
       <Cutout className='logo_container'>
-        <ReactSVG
-          className={ cssClasses }
-          src={ url }
-          loading={ this.renderHourGlass }
-          fallback={ fallbackError }
-          beforeInjection={ this.applyBlurFilter }
-        />
+        <ImageLoader src={ url }>
+          <img
+            alt='main logo'
+            className={ cssClasses }
+            style={ { width: '256px', height: '256px', filter: blurredFilter } }
+          />
+          <FallbackScreen />
+          <Hourglass size={ 125 } />
+        </ImageLoader>
       </Cutout>
     );
   }
