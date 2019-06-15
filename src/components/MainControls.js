@@ -58,6 +58,8 @@ class MainControls extends Component {
     this.sleepingTimeout = setTimeout(() => {
       this.setState({ gameStatus: STATUS_SLEEPING });
     }, (Math.random() * (14 - 8) + 8) * 1000);
+
+    this.scoreTimer = setInterval(() => this.tick(), 1000);
   }
 
   tick() {
@@ -73,8 +75,6 @@ class MainControls extends Component {
 
         this.shuffleLogoList();
       });
-
-    this.scoreTimer = setInterval(() => this.tick(), 1000);
   }
 
   componentDidMount() {
@@ -86,6 +86,8 @@ class MainControls extends Component {
 
     const { randomLogo, score } = this.state;
 
+    clearInterval(this.scoreTimer);
+
     if (randomLogo.name === item) {
       document.getElementById('guessedSound').play();
 
@@ -95,8 +97,6 @@ class MainControls extends Component {
       });
     } else {
       document.getElementById('gameoverSound').play();
-
-      clearInterval(this.scoreTimer);
 
       this.setState({
         gameStatus: STATUS_GAMEOVER,
