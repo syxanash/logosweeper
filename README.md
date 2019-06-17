@@ -29,6 +29,8 @@ $ yarn start
 
 This app was made just as a small project to learn [React](https://reactjs.org/). If you have suggestions, tips or rants please open an *issue* so I can fix and learn something ;)
 
+<a href="https://www.producthunt.com/posts/logosweeper?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-logosweeper" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=158581&theme=light" alt="Logosweeper - Tech stack logo quiz game | Product Hunt Embed" style="width: 250px; height: 54px;" width="250px" height="54px" /></a>
+
 All logos appearing on this app are property of their respective owners.
 
 ## License
