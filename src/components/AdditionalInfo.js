@@ -9,7 +9,7 @@ class AdditionalInfo extends Component {
     const { score, timeCount } = this.props;
     return (
       <Button size='lg' className='animated rubberBand'>
-        <Anchor style={ { textDecoration: 'none' } } href={ `https://twitter.com/intent/tweet?text=I%20just%20guessed%20${score}%20logos%20in%20${timeCount}%20seconds%20on%20https%3A%2F%2Flogosweeper.netlify.com%20%F0%9F%8E%AF` } target='_blank'>
+        <Anchor style={ { textDecoration: 'none' } } href={ `https://twitter.com/intent/tweet?text=I%20just%20guessed%20${score}%20logos%20in%20${timeCount}%20seconds%20on%20https%3A%2F%2Flogosweeper.surge.sh%20%F0%9F%8E%AF` } target='_blank'>
           <span style={ { display: 'flex' } }>Share score on&nbsp;<img src={ twitterLogo } style={ { height: '25px' } } alt="twitter"/></span>
         </Anchor>
       </Button>
