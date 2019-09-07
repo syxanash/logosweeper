@@ -10,6 +10,7 @@ class Logo extends Component {
       url,
       score,
       blurred,
+      startCounter,
       fallbackError: FallbackScreen,
     } = this.props;
 
@@ -27,7 +28,10 @@ class Logo extends Component {
 
     return (
       <Cutout className='logo_container'>
-        <ImageLoader src={ url }>
+        <ImageLoader
+          src={ url }
+          onLoad={ startCounter }
+        >
           <img
             alt='main logo'
             className={ cssClasses }

@@ -35,6 +35,7 @@ class MainControls extends Component {
       oldScore: 0,
       gameStatus: STATUS_THINKING,
       timerCount: 0,
+      imageLoaded: false,
     };
   }
 
@@ -53,13 +54,19 @@ class MainControls extends Component {
       allChoices,
       randomLogo,
       logoImgUrl,
+      imageLoaded: false,
     });
 
     this.sleepingTimeout = setTimeout(() => {
       this.setState({ gameStatus: STATUS_SLEEPING });
     }, (Math.random() * (14 - 8) + 8) * 1000);
 
-    this.scoreTimer = setInterval(() => this.tick(), 1000);
+    this.scoreTimer = setInterval(() => {
+      const { imageLoaded } = this.state;
+      if (imageLoaded) {
+        this.tick();
+      }
+    }, 1000);
   }
 
   tick() {
@@ -82,10 +89,9 @@ class MainControls extends Component {
   }
 
   onClick = (item) => {
-    clearTimeout(this.sleepingTimeout);
-
     const { randomLogo, score } = this.state;
 
+    clearTimeout(this.sleepingTimeout);
     clearInterval(this.scoreTimer);
 
     if (randomLogo.name === item) {
@@ -102,6 +108,10 @@ class MainControls extends Component {
         gameStatus: STATUS_GAMEOVER,
       });
     }
+  }
+
+  startCounter = () => {
+    this.setState({ imageLoaded: true });
   }
 
   onRestart() {
@@ -121,9 +131,13 @@ class MainControls extends Component {
   onContinue = () => {
     document.getElementById('buttonClickSound').play();
 
+    clearTimeout(this.sleepingTimeout);
+    clearInterval(this.scoreTimer);
+
     this.setState({
       gameStatus: STATUS_THINKING,
     });
+
     this.shuffleLogoList();
   }
 
@@ -223,6 +237,7 @@ class MainControls extends Component {
           blurred={ gameStatus === STATUS_THINKING || gameStatus === STATUS_SLEEPING }
           url={ logoImgUrl }
           score={ score }
+          startCounter={ this.startCounter }
           fallbackError={ () => (
             <span>
               <h1 style={ { color: 'red' } }>Error rendering logo...</h1>
