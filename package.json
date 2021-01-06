@@ -4,10 +4,11 @@
   "private": true,
   "dependencies": {
     "animate.css": "^3.7.1",
-    "axios": "^0.18.1",
+    "axios": "0.21.1",
     "lodash": "^4.17.13",
     "lodash.template": "^4.5.0",
     "node-forge": "0.10.0",
+    "node-notifier": "5.4.3",
     "object-path": "0.11.5",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
