@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "animate.css": "^3.7.1",
-    "axios": "0.21.1",
+    "axios": "0.21.2",
     "immer": "^9.0.6",
     "lodash": "^4.17.21",
     "lodash.template": "^4.5.0",
