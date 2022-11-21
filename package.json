@@ -17,7 +17,7 @@
     "react-helmet": "^5.2.1",
     "react-load-image": "^0.1.7",
     "react-retro-hit-counter": "^1.0.1",
-    "react-scripts": "^3.0.1",
+    "react-scripts": "^5.0.1",
     "react95": "^2.0.0",
     "styled-components": "^4.2.0"
   },
@@ -53,6 +53,6 @@
     "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.13.0",
-    "react-dev-utils": "^11.0.4"
+    "react-dev-utils": "^12.0.1"
   }
 }
