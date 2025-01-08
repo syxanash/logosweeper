@@ -16,7 +16,7 @@ import thinkingLogo from '../resources/images/thinking.svg';
 import guessedLogo from '../resources/images/guessed.svg';
 import sleepingLogo from '../resources/images/sleeping.svg';
 
-const LOGOS_REPO = 'https://raw.githubusercontent.com/gilbarbara/logos/master/logos.json';
+const LOGOS_REPO = 'https://raw.githubusercontent.com/gilbarbara/logos/refs/heads/main/logos.json';
 
 const STATUS_GAMEOVER = '😵';
 const STATUS_THINKING = '🤔';

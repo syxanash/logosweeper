@@ -9,7 +9,7 @@ import 'animate.css';
 import './InfoWindow.css';
 
 import octocatLogo from '../resources/images/octocat.png';
-import twitterLogo from '../resources/images/twitter.svg';
+import blueskyLogo from '../resources/images/bluesky.svg';
 import productHuntLogo from '../resources/images/product-hunt.png';
 
 class InfoWindow extends Component {
@@ -40,8 +40,8 @@ class InfoWindow extends Component {
                     </Anchor>
                   </Button>
                   <Button size='lg' square style={ { margin: '5px' } }>
-                    <Anchor href='https://twitter.com/intent/tweet?text=Test%20your%20wisdom%20and%20readiness%20to%20adopt%20the%20next%20big%20bloated%20tech%20stack%20by%20guessing%20as%20many%20logos%20as%20you%20can%20in%20a%20row%20%F0%9F%8E%AF%20https%3A%2F%2Flogosweeper.surge.sh' target='_blank'>
-                      <img src={ twitterLogo } style={ { height: '30px' } } alt="twitter"/>
+                    <Anchor href='https://bsky.app/intent/compose?text=Test%20your%20wisdom%20and%20readiness%20to%20adopt%20the%20next%20big%20bloated%20tech%20stack%20by%20guessing%20as%20many%20logos%20as%20you%20can%20in%20a%20row%20%F0%9F%8E%AF%20https%3A%2F%2Flogosweeper.surge.sh' target='_blank'>
+                      <img src={ blueskyLogo } style={ { height: '25px' } } alt="bluesky"/>
                     </Anchor>
                   </Button>
                   <Button
